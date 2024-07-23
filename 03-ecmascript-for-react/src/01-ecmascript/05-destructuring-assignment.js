@@ -8,22 +8,23 @@
 const courses = [
   {
     id: 1,
-    title: 'React 펀더멘탈',
-    url: 'https://fundamentals.dev/react',
+    title: "React 펀더멘탈",
+    url: "https://fundamentals.dev/react",
   },
   {
     id: 2,
-    title: 'React Router 펀더멘탈',
-    url: 'https://fundamentals.dev/react-rouer',
+    title: "React Router 펀더멘탈",
+    url: "https://fundamentals.dev/react-rouer",
   },
   {
     id: 3,
-    title: 'Recoil 펀더멘탈',
-    url: 'https://fundamentals.dev/recoil',
+    title: "Recoil 펀더멘탈",
+    url: "https://fundamentals.dev/recoil",
   },
 ];
 
 function spreadArray() {
+  // Block Scope
   {
     const reactCourse = courses[0];
     const restCourses = courses.slice(1);
@@ -35,8 +36,10 @@ function spreadArray() {
   // 🔶 구조 분해 할당 구문을 사용해 courses 배열에서 항목을 분해 및 할당합니다.
   // 참고: https://mzl.la/3Jfrwpm
 
-  // console.log({ course: reactCourse });
-  // console.log({ rest: restCourses });
+  const [reactCourse, ...restCourses] = courses;
+
+  console.log({ course: reactCourse }); // 위 코드 없으면 오류뜸 block scope니까
+  console.log({ rest: restCourses });
 }
 
 function spreadObject() {
@@ -46,6 +49,7 @@ function spreadObject() {
     let reactCourseId = reactCourse.id;
     let reactCourseTitle = reactCourse.title;
     let reactCourseUrl = reactCourse.url;
+    // 이짓을 왜하니..? 구조분해할당해라
 
     console.log(reactCourseId);
     console.log(reactCourseTitle);
@@ -55,18 +59,20 @@ function spreadObject() {
   // 🔶 구조 분해 할당 구문을 사용해 reactCourse 객체에서 항목을 분해 및 할당합니다.
   // 참고: https://mzl.la/3Jfrwpm
 
-  // console.log({ courseId });
-  // console.log({ courseTitle });
-  // console.log({ courseUrl });
+  const { id: courseId, title: courseTitle, url: courseUrl } = reactCourse;
+
+  console.log({ courseId });
+  console.log({ courseTitle });
+  console.log({ courseUrl });
 }
 
 function spreadRender() {
   const koreanFoods = {
-    caption: '한식 메뉴',
+    caption: "한식 메뉴",
     rows: [
-      { headline: '뚝배기 불고기', content: 8000 },
-      { headline: '스팸치즈볶음밥', content: 7500 },
-      { headline: '불고기낙지덮밥', content: 9000 },
+      { headline: "뚝배기 불고기", content: 8000 },
+      { headline: "스팸치즈볶음밥", content: 7500 },
+      { headline: "불고기낙지덮밥", content: 9000 },
     ],
   };
 
@@ -90,19 +96,19 @@ function spreadRender() {
               </tr>
             `
           );
-        }, '')}
+        }, "")}
       </table>
     `);
   }
 }
 
 function numberWithComma(numberValue) {
-  return numberValue.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  return numberValue.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 function removeSpaceHTMLString(htmlString) {
   return htmlString.replace(/\s+<|\n|>\s+/g, function ($1) {
-    return $1.indexOf('<') > -1 ? '<' : $1.indexOf('>') > -1 ? '>' : '';
+    return $1.indexOf("<") > -1 ? "<" : $1.indexOf(">") > -1 ? ">" : "";
   });
 }
 
