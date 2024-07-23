@@ -95,12 +95,12 @@ async function practice3() {
   console.log("end!");
 }
 
-practice3();
+// practice3();
 
 // --------------------------------------------------------------------------
 // Promise.all, Promise.race
 
-const MAX_TIMEOUT = 1000;
+const MAX_TIMEOUT = 5000;
 
 const promise1 = () =>
   new Promise((resolve) => {
@@ -123,9 +123,27 @@ const promise2 = () =>
 const promise3 = () => Promise.reject("❌ 오류 발생!");
 
 // Promise.all
+// [promise1, promise2, promise3, ..., promiseN].then(()=> { ... })
+// 위 비동기(promise)가 모두 실행된 뒤 then
+// 순회 가능한 객체에 주어진 모든 프로미스가 이행한 후, 혹은 프로미스가 주어지지 않았을 때 이행하는 Promise를 반환
 // 참고: https://mzl.la/49EvJxn
 // 🔶 Promise.all 메서드를 사용해 모든 Promise가 실행된 이후 콜백되도록 실습을 진행합니다.
 
+Promise.all([promise1(), promise2()])
+  .then((results) => {
+    console.log(results); // [result1, result2]가 배열의 형태로
+  })
+  .catch((error) => console.log(error));
+
+
 // Promise.race
+// [promise1, promise2, promise3, ..., promiseN].then(()=> { ... })
+// 가장 빠른 응답의 promise를 실행되고 끝
+// Promise 객체를 반환합니다. 이 프로미스 객체는 iterable 안에 있는 프로미스 중에 가장 먼저 완료된 것의 결과값으로 그대로 이행하거나 거부합니다.
 // 참고: https://mzl.la/49EvJxn
 // 🔶 Promise.race 메서드를 사용해 응답이 가장 빠른 Promise 값만 출력되도록 실습을 진행합니다.
+Promise.race([promise1(), promise2()])
+  .then((winner) => {
+    console.log(winner); // winner
+  })
+  .catch((error) => console.log(error));
