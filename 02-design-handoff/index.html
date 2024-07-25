@@ -3,57 +3,214 @@
 
   <head>
     <meta charset="UTF-8" />
+    <title>디자인 → 개발 핸드오프</title>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0"
+      content="width=device-width, initial-scale=1"
     />
-    <title>hand off 과제</title>
+    <meta
+      name="description"
+      content="Figma 디자인을 개발 코드로 핸드오프(Hand-off)합니다."
+    />
+    <link
+      rel="icon"
+      href="src/assets/favicon.svg"
+    />
     <link
       rel="stylesheet"
-      href="./styles/style.css"
+      href="src/styles/main.css"
     />
+    <script
+      type="module"
+      src="src/main.js"
+    ></script>
   </head>
 
-  <body>
-    <h1 class="sr-only">Architectures</h1>
-    <ul class="list-item">
-      <li class="item">
-        <figure>
+  <body class="demo">
+
+    <sortable-list>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-01.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">Building design</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        >
           <img
-            src="/02-design-handoff/assets/Architecture.png"
-            alt="건축 역사"
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
           />
-          <figcaption>History of Architecture</figcaption>
-        </figure>
+        </button>
       </li>
-      <li class="item">
-        <figure>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-02.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">Graphics</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        >
           <img
-            src="/02-design-handoff/assets/building design.png"
-            alt="빌딩 디자인"
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
           />
-          <figcaption>Building design</figcaption>
-        </figure>
+        </button>
       </li>
-      <li class="item">
-        <figure>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-03.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">History of Architecture</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        ><img
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
+          /></button>
+      </li>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-04.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">Climatology</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        >
           <img
-            src="/02-design-handoff/assets/graphics.png"
-            alt="그래픽"
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
           />
-          <figcaption>Graphics</figcaption>
-        </figure>
+        </button>
       </li>
-      <li class="item">
-        <figure>
+    </sortable-list>
+
+    <div
+      class="spacer"
+      style="inline-size: 60px; height: 60px"
+    ></div>
+
+    <sortable-list>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-01.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">Building design</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        >
           <img
-            src="/02-design-handoff/assets/climatology.png"
-            alt="기후학"
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
           />
-          <figcaption>Climatology</figcaption>
-        </figure>
+        </button>
       </li>
-    </ul>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-02.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">Graphics</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        >
+          <img
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
+          />
+        </button>
+      </li>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-03.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">History of Architecture</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        ><img
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
+          /></button>
+      </li>
+      <li>
+        <img
+          data-role="image"
+          src="src/assets/architectures/architecture-04.jpg"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <span data-role="label">Climatology</span>
+        <button
+          type="button"
+          data-role="handle"
+          title="move item (using arrow up/down key)"
+        >
+          <img
+            src="src/assets/icons/hamburger.svg"
+            alt="move item (using arrow up/down key)"
+            width="20"
+            height="20"
+          />
+        </button>
+      </li>
+    </sortable-list>
+
   </body>
 
 </html>

@@ -1,0 +1,18 @@
+{
+  "name": "likelion-10th-lecture",
+  "version": "0.0.1",
+  "description": "멋사 프론트엔드 스쿨 10기 리액트 프로그래밍 학습 저장소# react-lecture",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx live-server --host=localhost --port=3000 --no-browser --mount=/:./publilc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "9.7.0",
+    "eslint": "9.7.0",
+    "globals": "15.8.0"
+  }
+}
