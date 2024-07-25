@@ -58,11 +58,16 @@ function unmount() {
   reactDomRoot.unmount();
 }
 
-// 타이머 웹 API
-// setTimeOut
-// 특정 시간이 지나면 앱을 화면에 렌더링 하세요.
+render();
 
-setTimeout(render, 2000);
+// // 타이머 웹 API
+// // setTimeOut
+// // 특정 시간이 지나면 앱을 화면에 렌더링 하세요.
 
-// 특정 시간이 지나면 렌더링된 앱을 화면에서 표시하지 마세요.
-setTimeout(unmount, 4000);
+// setTimeout(render, 2000);
+
+// // 특정 시간이 지나면 렌더링된 앱을 화면에서 표시하지 마세요.
+// setTimeout(unmount, 4000);
+
+// 반응성(Reactivity) 구현
+// 개발자 -> 데이터 수정 -> 반응성(이를 감지) -> 화면 업데이트 구현
