@@ -14,7 +14,7 @@ const listData = {
 const itemList = listData.items.map(({ id, title }) => {
   const listElement = React.createElement(
     "li",
-    { className: "item" },
+    { className: "item", key: id },
     React.createElement("img", {
       src: `/architectures/architecture-${id}.jpg`,
       alt: "",
@@ -47,6 +47,22 @@ const list = React.createElement(
 // console.log(list);
 
 const container = document.getElementById("root");
+// ReactDOM Root 생성
 const reactDomRoot = ReactDOM.createRoot(container);
 
-reactDomRoot.render(list);
+function render() {
+  reactDomRoot.render(list);
+}
+
+function unmount() {
+  reactDomRoot.unmount();
+}
+
+// 타이머 웹 API
+// setTimeOut
+// 특정 시간이 지나면 앱을 화면에 렌더링 하세요.
+
+setTimeout(render, 2000);
+
+// 특정 시간이 지나면 렌더링된 앱을 화면에서 표시하지 마세요.
+setTimeout(unmount, 4000);
