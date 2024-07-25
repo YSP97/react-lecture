@@ -14,26 +14,6 @@ const listData = {
   ],
 };
 
-// 반응성 구현: Proxy 객체 활용(like Vue.js)
-const reactivity = new Proxy(listData, {
-  // GET (원본 수정 대신, 프록시를 사용해 가로채서 읽기)
-  get(target, prop) {
-    console.log("[GET]");
-    // 객체의 속성을 반환
-    return target[prop];
-  },
-  // SET (원본 수정 대신, 프록시를 사용해 가로채서 쓰기)
-  set(target, prop, newValue) {
-    const oldValue = target[prop];
-
-    // 새로운 값으로 업데이트 로직 작성
-    target[prop] = newValue;
-    console.log("[SET] update", JSON.stringify(newValue));
-
-    return true; // 반드시성공 또는 실패표시 해줘야함
-  },
-});
-
 const itemList = listData.items.map(({ id, title }) => {
   const listElement = React.createElement(
     "li",
