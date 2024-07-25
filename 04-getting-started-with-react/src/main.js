@@ -1,15 +1,18 @@
 // 실습(Practice)
-import { createElement } from "./lib/virtual/index.js";
+import { createElement, isValidElement } from "./lib/virtual/index.js";
 import { createRoot } from "./lib/virtual-dom/index.js";
 // 가상요소로 이거 만드는 게 목표 <ul className="architectures" lang="en"></ul>
 
+// 일반 자바스크립트 객체
+
+// 리액트에서 createElement와 비슷한 함수를 만들어서 생성 흐름을 파악하도록 하자
 //Data (선언적 프로그래밍)
 const listData = {
   items: [
     { id: "1", title: "Climatology" },
+    { id: "4", title: "Building design" },
     { id: "2", title: "History of Architecture" },
     { id: "3", title: "Graphics" },
-    { id: "4", title: "Building design" },
   ],
 };
 
@@ -49,6 +52,12 @@ const list = createElement(
   // ...children(child1,child2,...childN)
   ...listItems
 );
+
+// 가상 요소 객체
+console.log(isValidElement(list));
+
+// 일반 자바스크립트 객체
+console.log(isValidElement({}));
 
 // 가상 돔(실제 돔 흉내: 단순화해서) 생성됨
 console.log(list);

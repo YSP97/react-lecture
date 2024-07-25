@@ -1,3 +1,4 @@
+export const VIRTUAL_ELEMENT_TYPE = Symbol("virtual.element");
 function createElement(type, props, ...children) {
   return {
     $$typeof: Symbol("virtual.element"),
