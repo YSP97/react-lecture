@@ -17,7 +17,7 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
-    "**/node_modules": true,
+    "**/node_modules": false,
     "**/*.js.map": {
       "when": "$(basename)"
     }
@@ -32,19 +32,19 @@
 
   // 언어 별, 포멧터 설정
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[css]": {
-    "editor.defaultFormatter": "vscode.css-language-features",
+    "editor.defaultFormatter": "vscode.css-language-features"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   // Emmet 설정
@@ -116,7 +116,7 @@
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.suggest.autoImports": true,
   "typescript.suggest.paths": false,
-  
+
   // Error Lens 설정
   "errorLens.enabled": true,
   "errorLens.codeLensEnabled": false,
@@ -129,6 +129,5 @@
     "warning": "⚠️",
     "info": "📢",
     "hint": "🔔"
-  },
-
+  }
 }
