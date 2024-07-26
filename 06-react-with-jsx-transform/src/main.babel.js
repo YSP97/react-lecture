@@ -1,27 +1,27 @@
-import React from 'https://esm.sh/react';
-import { createRoot } from 'https://esm.sh/react-dom';
+import React from "https://esm.sh/react";
+import { createRoot } from "https://esm.sh/react-dom";
 
-function Avatar({ name, photo, status = 'offline', size = 64 }) {
-  let iconPath = '';
-  let statusMessage = '';
+function Avatar({ name, photo, status = "offline", size = 64 }) {
+  let iconPath = "";
+  let statusMessage = "";
 
   switch (status) {
     default:
-    case 'offline':
-      iconPath = '/icons/status-offline.svg';
-      statusMessage = '오프라인';
+    case "offline":
+      iconPath = "/icons/status-offline.svg";
+      statusMessage = "오프라인";
       break;
-    case 'online':
-      iconPath = '/icons/status-online.svg';
-      statusMessage = '온라인';
+    case "online":
+      iconPath = "/icons/status-online.svg";
+      statusMessage = "온라인";
       break;
-    case 'dont-disturb':
-      iconPath = '/icons/status-dont-disturb.svg';
-      statusMessage = '방해금지';
+    case "dont-disturb":
+      iconPath = "/icons/status-dont-disturb.svg";
+      statusMessage = "방해금지";
       break;
-    case 'away':
-      iconPath = '/icons/status-away.svg';
-      statusMessage = '자리비움';
+    case "away":
+      iconPath = "/icons/status-away.svg";
+      statusMessage = "자리비움";
       break;
   }
 
@@ -35,11 +35,10 @@ function Avatar({ name, photo, status = 'offline', size = 64 }) {
         <img src={iconPath} alt="" />
       </figcaption>
     </figure>
-  )
+  );
 }
 
 function AvatarListPage() {
-
   // JSX
   return (
     <ul className="AvatarList">
@@ -56,10 +55,10 @@ function AvatarListPage() {
         <Avatar name="정민" photo="woman-01.jpg" />
       </li>
     </ul>
-  )
+  );
 }
 
-const container = document.getElementById('react-app');
+const container = document.getElementById("react-app");
 
 if (container) {
   createRoot(container).render(<AvatarListPage />);
