@@ -1,4 +1,4 @@
-// Viretual DOM
+// Virtual DOM
 // 가상 문서 객체 모델
 // 실제 DOM
 
