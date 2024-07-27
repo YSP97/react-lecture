@@ -1,9 +1,21 @@
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "strict": true,
+//     "jsx": "react",
+//     "module": "ESNext",
+//     "removeComments": true,
+//   }
+// }
+
 {
   "compilerOptions": {
     "baseUrl": ".",
     "strict": true,
     "jsx": "react",
     "module": "ESNext",
-    "removeComments": true,
-  }
+    "removeComments": true
+  },
+  "include": ["src/**/*", "public/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

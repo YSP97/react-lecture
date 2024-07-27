@@ -8,7 +8,7 @@ function Avatar({ name, photo, status = "offline", size = 64 }) {
   switch (status) {
     default:
     case "offline":
-      iconPath = "/icons/status-offline.svg";
+      iconPath = "/icons/status-offline.svg ";
       statusMessage = "오프라인";
       break;
     case "online":
