@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "private": true,
+  "name": "vite-custom-template",
+  "description": "vite 커스텀 탬플릿을 사용해 React 프로젝트 오토 스캐폴딩",
+  "version": "0.1.0",
+  "scripts": {
+    "vite": "vite"
+  },
+  "devDependencies": {
+    "vite": "^5.3.5"
+  }
+}
