@@ -2,7 +2,11 @@ import { defineConfig } from "vite";
 import pluginReact from "@vitejs/plugin-react";
 
 const viteConfig = defineConfig({
-  plugins: [pluginReact()],
+  plugins: [
+    pluginReact({
+      jsxRuntime: "automatic",
+    }),
+  ],
 });
 
 export default viteConfig;
