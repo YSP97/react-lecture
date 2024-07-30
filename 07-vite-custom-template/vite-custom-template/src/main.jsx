@@ -1,13 +1,20 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
+import React, { StrictMode } from "react";
+import { createRoot } from "https://esm.sh/react-dom";
+import AvatarListPage from "./pages/AvatarList.jsx";
+// 상대경로로 쓰세용 -> 절대경로로 쓰면 안되는 환경임 -> 절대경로로 쓰면 노드모듈스에서 자꾸 찾아서
 
-// Vite 클라이언트 환경(브라우저)에서 사용 가능한 환경 변수
-// console.log(import.meta.env);
+const container = document.getElementById("react-app");
 
-const domNode = document.getElementById("react-app");
-createRoot(domNode).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+if (container) {
+  createRoot(container).render(
+    // Strict Mode 필요한 이유:
+
+    // Compound Compenent Pattern: <React.StrictMode> => nameSpace.module
+    // 아래는 맨 위에서 구조분해할당으로 지정한 StrictMode로 쓴 것을 알 수 있음!
+    <StrictMode>
+      <AvatarListPage />
+    </StrictMode>
+  );
+} else {
+  console.warn('문서에 "#react-app" 요소가 존재하지 않습니다.');
+}
