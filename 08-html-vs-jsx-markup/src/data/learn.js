@@ -1,4 +1,4 @@
-export const imageType = 'react';
+export const imageType = 'kakao talk'; // 'react' | 'vite' | 'next.js' | 'kakao talk'
 
 export const isShowReactImage = true;
 

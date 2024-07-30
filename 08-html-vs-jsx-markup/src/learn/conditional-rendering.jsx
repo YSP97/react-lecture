@@ -1,7 +1,15 @@
-import { typeOf } from '../utils';
+import { typeOf, randomNumber } from '../utils';
+
+// 이미지 경로 불러오기
 import reactImagePath from '../assets/react.svg?url';
 import viteImagePath from '../assets/vite.svg?url';
+import nextJsImagePath from '../assets/next-js.svg?url';
+import kakaoTalkImagePath from '../assets/kakao-talk.svg?url';
 
+// 이미지 타입 배열 관리
+const IMAGE_TYPES = ['react', 'vite', 'next.js', 'kakao talk'];
+
+// 컴포넌트
 function ConditionalRendering({ imageType }) {
   // 조건부 렌더링
   // 함수 몸체 (function body) 영역 안에서
@@ -9,16 +17,35 @@ function ConditionalRendering({ imageType }) {
   let imagePath = '';
   let printText = '';
 
-  if (imageType.includes('react')) {
+  if (imageType.toLowerCase().includes('react')) {
     imagePath = reactImagePath;
     printText = 'React';
   }
 
-  if (imageType.includes('vite')) {
+  if (imageType.toLowerCase().includes('vite')) {
     imagePath = viteImagePath;
     printText = 'Vite';
   }
 
+  if (imageType.toLowerCase().includes('next.js')) {
+    imagePath = nextJsImagePath;
+    printText = 'Next.js';
+  }
+
+  if (imageType.toLowerCase().includes('kakao talk')) {
+    imagePath = kakaoTalkImagePath;
+    printText = 'Kakao Talk';
+  }
+
+  // JSX 안에서는 문을 사용할 수 없다! 반드시 식만 쓸 수 있음(예를들어 삼항식 같은 건 가능한데 if문은 불가능)
+  const randomImage =
+    randomNumber(0, 1) > 0.5 ? (
+      <img className="spinner" src="/icons/spinner.svg" alt="로딩 중..." />
+    ) : (
+      <img src={viteImagePath} alt="Vite" style={{ height: 42 }} />
+    );
+
+  // JSX 반환 (마크업 생성)
   return (
     <>
       <dt>조건부 렌더링(conditional rendering)</dt>
@@ -33,31 +60,44 @@ function ConditionalRendering({ imageType }) {
       </dd>
       <dd style={{ marginTop: 12 }}>
         <p>spinner 또는 vite 이미지가 랜덤으로 화면에 렌더링 되도록 합니다.</p>
-        <div className="conditionalRendering">
-          <img className="spinner" src="/icons/spinner.svg" alt="로딩 중..." />
-          <img src="/vite.svg" alt="Vite" style={{ height: 42 }} />
-        </div>
+        <div className="conditionalRendering">{randomImage}</div>
       </dd>
     </>
   );
 }
 
+// 컴포넌트 기본 내보내기
 export default ConditionalRendering;
 
+// 컴포넌트 속성(들) 검사
 ConditionalRendering.propTypes = {
+  // imageType 속성 검사
   imageType(props, propName, componentName) {
+    // 컴포넌트 속성 값
     const propValue = props[propName];
+
+    // 컴포넌트 속성 값의 타입
     const propType = typeOf(propValue);
+
+    // 컴포넌트 속성이 허용하는 타입
     const allowedType = 'string';
 
-    // 타입 검사
-    if (propType !== allowedType) {
-      // 타입이 다르면 오류 처리
+    // 정규식을 사용해서 특정 문자 값이 매칭(일치)되는 지 검토
+    const typeMatchString = IMAGE_TYPES.reduce((result, type, index, array) => {
+      const divider = index < array.length - 1 ? '|' : '';
+      return result + type + divider;
+    }, '');
+
+    const typeMatch = new RegExp(`^(${typeMatchString})$`, 'i');
+
+    // 타입 검사 수행
+    if (propType !== allowedType || !typeMatch.test(propValue)) {
+      // 타입이 다르면? 오류 처리
       throw new Error(
-        `${componentName} 컴포넌트 ${propName} 속성 타입은 "${allowedType}" 타입이 요구되나, 실제 전달된 타입은 "${propType}"입니다.`
+        `${componentName} 컴포넌트 ${propName} 속성에 설정 가능한 값은 "[${IMAGE_TYPES.toString()}]" 중 하나가 요구되나, 실제 전달된 속성 값은 "${propValue}"입니다.`
       );
     }
 
-    // 그렇지 않으면 통과
+    // 타입이 동일하고 속성 값이 매칭(일치)되면? 통과
   },
 };
