@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { typeOf } from '../utils';
-import PropTypes from '../utils/prop-types';
+import { bool } from 'prop-types';
 
-function ConditionalDisplay({ isShowImage }) {
+function ConditionalDisplay({ isShowImage = true }) {
   // 조건부 렌더링
   // - JavaScript 로직
   // - if 문
@@ -61,6 +62,7 @@ function ConditionalDisplay({ isShowImage }) {
 export default ConditionalDisplay;
 
 // ConditionalDisplay.propTypes = {
+// 사용자가 직접 컴포넌트의 속성을 검사하는 코드
 //   isShowImage(props, propName, componentName) {
 //     const propValue = props[propName];
 //     const propType = typeOf(propValue);
@@ -74,6 +76,7 @@ export default ConditionalDisplay;
 //   },
 // };
 
+// propTypes 라이브러리를 사용하여 속성 검사하는 코드
 ConditionalDisplay.propTypes = {
-  isShowImage: PropTypes.bool,
+  isShowImage: bool.isRequired,
 };

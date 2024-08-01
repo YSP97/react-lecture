@@ -1,6 +1,9 @@
+// 문자 타입 관리
 export const imageType = 'react'; // 'react' | 'vite' | 'next.js' | 'kakao talk'
 
-export const isShowReactImage = !true; // FALSE
+// 이미지 타입 배열 관리
+export const IMAGE_TYPES = ['react', 'vite', 'next.js', 'kakao talk'];
+export const isShowReactImage = false; // FALSE
 
 export const statusMessages = ['⌛️ 대기', '⏳ 로딩 중...', '✅ 로딩 성공!', '❌ 로딩 실패.'];
 

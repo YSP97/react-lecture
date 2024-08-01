@@ -1,5 +1,7 @@
+import { StatusMessagesType } from '../@types/types.d';
+import { statusMessages } from '../data/learn';
 import { randomNumber } from '../utils';
-import PropTypes from '../utils/prop-types';
+import { string, arrayOf, oneOf } from 'prop-types';
 
 function DataBinding({ statusMessages }) {
   // [미션] 랜덤 로직을 작성해서 임의의 상태 메시지가 표시되도록 설정합니다.
@@ -13,8 +15,7 @@ function DataBinding({ statusMessages }) {
   //   return null;
   // }
 
-  const statusMessage =
-    statusMessages[randomNumber(0, statusMessages.length - 1)];
+  const statusMessage = statusMessages[randomNumber(0, statusMessages.length - 1)];
 
   return (
     <>
@@ -39,5 +40,14 @@ export default DataBinding;
 // Component.propTypes
 
 DataBinding.propTypes = {
-  statusMessages: PropTypes.array,
+  // statusMessages: array.isRequired, // isRequired: 필수값 표시
+  // 특정 타입으로 된 Array 타입 검사
+  // [타입스크립트에서] string[] -> [prop-types에서] arrayOf(string)
+  // number[] -> arrayOf(number)
+  // statusMessages: arrayOf(string).isRequired, // string[]: Array인데 string으로 된 타입
+  // 지정된 것 중에 하나만 가능하게 좁히기: oneOf
+  // 근데 이게 유지보수에 좋지 않음;; 나중에 하나 바꾸면 다 바꾸러 가야함
+  // statusMessages: arrayOf(oneOf(['⌛️ 대기', '⏳ 로딩 중...', '✅ 로딩 성공!', '❌ 로딩 실패.'])).isRequired,
+  // 유지보수가 좋게 하려면 이렇게 배열을 넣는 방법이 좋을 것이다!
+  statusMessages: StatusMessagesType.isRequired,
 };
