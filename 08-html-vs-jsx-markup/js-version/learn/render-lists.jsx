@@ -30,12 +30,14 @@ function RenderLists({ reactLibrary, items /* { id: string, message: string }[] 
 
   //   let listItems = items; // 대기 → 로딩 실패 순
 
+  // reverse: true인 경우 역순 정렬
   //   if (reverse) {
   //     // [1] listItems = items.reverse();
   //     // listItems = items.reverse(); // 참조된 items을 직접 변경 (순서 바꾸기)
   //     // listItems = items.slice().reverse();
   //     // listItems = [...items].reverse();
 
+  // 원본배열을 훼손하지 않기때문에 reverse보다 toReversed(E5 2023 v14 추가됨)를 사용하는 것이 좋다!
   //     // [2] listItems = items.toReversed();
   //     listItems = items.toReversed(); // ES 2023 (v14) 추가
   //   }
@@ -133,6 +135,7 @@ function RenderLists({ reactLibrary, items /* { id: string, message: string }[] 
         {/* <ul className="renderList">{reversedList}</ul> */}
 
         {/* 인라인 코드 로직 삽입 (식에서 사용 가능, 다만 문 제외) */}
+        {/* jsx에 직접 정렬하여 렌더링 하는법: 사람마다 바디에 하는 걸 선호할 수 있음 이건 자유! 근데 내생각엔 바디에서 조건처리 하는 게 좋은듯*/}
         {items.toReversed().map((item, index) => (
           <li key={item?.id ?? index}>{item.message}</li>
         ))}
