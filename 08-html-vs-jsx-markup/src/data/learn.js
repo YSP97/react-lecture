@@ -1,6 +1,6 @@
-export const imageType = 'kakao talk'; // 'react' | 'vite' | 'next.js' | 'kakao talk'
+export const imageType = 'react'; // 'react' | 'vite' | 'next.js' | 'kakao talk'
 
-export const isShowReactImage = true;
+export const isShowReactImage = !true; // FALSE
 
 export const statusMessages = [
   '⌛️ 대기',
