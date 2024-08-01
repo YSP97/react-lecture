@@ -30,7 +30,11 @@ function RenderLists({ items /* string[], Array<string> */ }) {
       </dd>
       <dd>
         <p>상태 메시지(status messages) 배열을 역순 정렬하여 렌더링합니다.</p>
-        <ul className="renderList">{renderList?.({ reverse: true })}</ul>
+        {/* <ul className="renderList">{renderList?.({ reverse: true })}</ul> */}
+        {items.toReversed().map((item) => (
+          <li key={item.toString()}>{item}</li>
+        ))}
+        {/* jsx에 직접 정렬하여 렌더링 하는법 사람마다 바디에 하는 걸 선호할 수 있음 이건 자유! 근데 내생각엔 바디에서 조건처리 하는 게 좋은듯*/}
       </dd>
       <dd>
         <p>
