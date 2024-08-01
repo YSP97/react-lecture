@@ -1,17 +1,11 @@
 // 문자 타입 관리
-export const imageType = 'kakao talk'; // 'react' | 'vite' | 'next.js' | 'kakao talk'
+export const imageType = 'react'; // 'react' | 'vite' | 'next.js' | 'kakao talk'
 
 // 이미지 타입 배열 관리
 export const IMAGE_TYPES = ['react', 'vite', 'next.js', 'kakao talk'];
+export const isShowReactImage = false; // FALSE
 
-export const isShowReactImage = false;
-
-export const statusMessages = [
-  '⌛️ 대기',
-  '⏳ 로딩 중...',
-  '✅ 로딩 성공!',
-  '❌ 로딩 실패.',
-];
+export const statusMessages = ['⌛️ 대기', '⏳ 로딩 중...', '✅ 로딩 성공!', '❌ 로딩 실패.'];
 
 export const statusMessagesWithID = [
   { id: 'message-xyz', message: '⌛️ 대기' },
