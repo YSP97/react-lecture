@@ -1,46 +1,116 @@
-import { array } from '../utils/prop-types';
+import { array, shape, string } from 'prop-types';
+import { Fragment } from 'react';
 
-function RenderLists({ items /* string[], Array<string> */ }) {
+function RenderLists({ reactLibrary, items /* { id: string, message: string }[] */ }) {
   // 함수 내부에 리스트 렌더링 코드를 작성해보세요.
-  const renderList = ({ reverse = false } = {}) => {
-    // 리스트 렌더링 결과 반환
-    // - [ ] Array.prototype.forEach? // 반환값이 없기때문에 forEach는 X
-    // - [x] Array.prototype.map?
+  // react.d.ts
+  // { @@typeof: 'Symbol(react.element)', ... }
+  // JSDOC
+  /**@type{() => Array<React.ReactElement>} */
+  // const renderList = (options = {}) => {
+  // const renderList = ({ reverse = false } = {}) => {
+  //   // const { reverse = false } = options;
+  //   // console.log({ reverse });
 
-    // reverse: true인 경우 역순 정렬
-    let listItems = items;
-    if (reverse) {
-      listItems = items.toReversed();
-      // 원본배열을 훼손하지 않기때문에 reverse보다 toReversed(E5 2023 v14 추가됨)를 사용하는 것이 좋다!
-    }
+  //   let listItems = items; // 대기 → 로딩 실패 순
 
-    return listItems.map((item) /* string */ => {
-      // console.log(item);
-      // JSX(React Element) Markup
-      return <li key={item}>{item}</li>;
+  //   if (reverse) {
+  //     // [1] listItems = items.reverse();
+  //     // listItems = items.reverse(); // 참조된 items을 직접 변경 (순서 바꾸기)
+  //     // listItems = items.slice().reverse();
+  //     // listItems = [...items].reverse();
+
+  //     // [2] listItems = items.toReversed();
+  //     listItems = items.toReversed(); // ES 2023 (v14) 추가
+  //   }
+
+  //   // 리스트 렌더링 결과 반환
+  //   // - [ ] Array.prototype.forEach?
+  //   // - [x] Array.prototype.map?
+  //   return listItems.map((item) /* string */ => {
+  //     // console.log(item);
+  //     // JSX(React Element) Markup
+  //     return <li key={item}>{item}</li>;
+  //   });
+  // };
+
+  // const reversedList = renderList().toReversed();
+
+  // 문
+  let demoListUsingStatement = [];
+
+  for (let item of items) {
+    demoListUsingStatement.push(<li key={item.id}>{item.message}</li>);
+  }
+
+  // 식
+  const demoList = items.map((item) => {
+    return <li key={item.id}>{item.message}</li>;
+  });
+
+  const renderDemoList = () =>
+    items.map(({ id, message }) => {
+      return <li key={id}>{message}</li>;
     });
-  };
+
+  const libraryList = Object.entries(reactLibrary);
 
   return (
     <>
       <dt>리스트 렌더링(list rendering)</dt>
       <dd>
+        {/* 직접 포함 */}
+        <ul>
+          {items.map(({ id, message }) => {
+            return <li key={id}>{message}</li>;
+          })}
+        </ul>
+        {/* 문에서 처리된 결과 값을 할당받은 지역 변수 참조 */}
+        <ul>{demoListUsingStatement}</ul>
+        {/* 함수 몸체의 지역 변수 참조 */}
+        <ul>{demoList}</ul>
+        {/* 함수 실행 결과 값 활용 */}
+        <ul>{renderDemoList()}</ul>
+      </dd>
+      <dd>
         <p>상태 메시지(status messages) 배열을 리스트 렌더링합니다.</p>
-        <ul className="renderList">{renderList?.()}</ul>
+        {/* 함수 실행 -> 결과 값 반환 (식에서 사용 가능) */}
+        {/* <ul className="renderList">{renderList()}</ul> */}
+        {/* 인라인 코드 로직 삽입 (식에서 사용 가능, 다만 문 제외) */}
+        <ul>
+          {items.map((item) => (
+            <li key={item.id}>{item.message}</li>
+          ))}
+        </ul>
       </dd>
       <dd>
         <p>상태 메시지(status messages) 배열을 역순 정렬하여 렌더링합니다.</p>
-        {/* <ul className="renderList">{renderList?.({ reverse: true })}</ul> */}
-        {items.toReversed().map((item) => (
-          <li key={item.toString()}>{item}</li>
+        {/* 함수 몸체의 변수 참조 (식에서 사용 가능) */}
+        {/* <ul className="renderList">{reversedList}</ul> */}
+
+        {/* 인라인 코드 로직 삽입 (식에서 사용 가능, 다만 문 제외) */}
+        {items.toReversed().map((item, index) => (
+          <li key={item?.id ?? index}>{item.message}</li>
         ))}
-        {/* jsx에 직접 정렬하여 렌더링 하는법 사람마다 바디에 하는 걸 선호할 수 있음 이건 자유! 근데 내생각엔 바디에서 조건처리 하는 게 좋은듯*/}
       </dd>
       <dd>
         <p>
           React 라이브러리(reactLibrary) 객체의 키, 값을 <q>설명 목록</q>으로 렌더링합니다.
         </p>
-        <dl className="reactLibrary">{/* 여기서 설명 목록으로 리스트 렌더링 합니다. */}</dl>
+        <dl className="reactLibrary">
+          {/* 여기서 설명 목록으로 리스트 렌더링 합니다. */}
+          {libraryList.map(([key, value]) => {
+            // React.Fragment 컴포넌트 & 리스트 렌더링
+            // Fragment 컴포넌트에 kty 설정 필요
+            // 그러므로 <></> 사용은 좋지 않음
+            return (
+              <Fragment key={key}>
+                <dt>{key}:</dt>
+                <dd>{value}</dd>
+              </Fragment>
+            );
+          })}
+        </dl>
       </dd>
     </>
   );
@@ -49,17 +119,14 @@ function RenderLists({ items /* string[], Array<string> */ }) {
 export default RenderLists;
 
 RenderLists.propTypes = {
-  // D.R.Y
-  // Reusability
-  // Mechanism
-  // - [x] Function
-  // - [ ] Class
-  // NEEDS
-  // Library (Utilities)
-  // items(props, propName, componentName) {
-  //   const propValue = props[propName];
-  //   const propType = typeOf(propValue);
-
-  // }
-  items: array,
+  // items: oneOf(statusMessages)
+  items: array, // [권장] arrayOf(string) | arrayOf(number)
+  // reactLibrary: shape() // [권장] shape({ name: string, author: string, writtenIn: string, type: string, license: string })
+  reactLibrary: shape({
+    name: string,
+    author: string,
+    writtenIn: string,
+    type: string,
+    license: string,
+  }),
 };
