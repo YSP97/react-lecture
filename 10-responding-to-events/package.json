@@ -1,8 +1,8 @@
 {
   "private": true,
   "type": "module",
-  "name": "vite-react",
-  "description": "Vite + React 스캐폴딩 by yamoo9",
+  "name": "08-html-vs-jsx-markup",
+  "description": "리액트 라이브러리를 사용해 사용자 인터페이스를 구축하는 방법을 학습합니다.",
   "version": "0.1.0",
   "scripts": {
     "dev": "vite --host",
