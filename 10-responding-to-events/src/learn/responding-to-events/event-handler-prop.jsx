@@ -1,3 +1,4 @@
+// import { on } from 'events';
 import { func } from 'prop-types';
 EventHandlerProp.propTypes = {
   onPrintMessage: func.isRequired,
@@ -5,7 +6,8 @@ EventHandlerProp.propTypes = {
 
 function EventHandlerProp({ onPrintMessage }) {
   const handleEnter = () => {
-    onPrintMessage?.();
+    console.log('enter');
+    onPrintMessage?.('❤️');
   };
   const handleLeave = () => {
     console.log('leave');

@@ -6,7 +6,8 @@ function NavContents() {
   // 이벤트 핸들러 정의
   // 부수효과(순수하지 않음) : 렌더링 프로세스와 연관이 없는 것을 처리한다.
   // -> 이벤트 핸들러로 처리하고 있는 모습이다
-  const handleLink = () => {
+  const handleLink = (e) => {
+    e.preventDefault();
     console.log('이벤트 응답');
     const firstLink = document.querySelector('[href="#responding-to-events"]');
     console.log(firstLink);
@@ -16,7 +17,8 @@ function NavContents() {
       <a
         href="#jsx-markup"
         // 2. JSX 내부 -> 근데 코드가 좀 더러워보임ㅎ
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           console.log('JSX 마크업');
         }}
       >
