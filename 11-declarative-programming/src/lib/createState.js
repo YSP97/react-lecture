@@ -1,17 +1,7 @@
-interface State {
-  [key: string | symbol | number]: any;
-}
+const createState = (data, callback) => {
+  let allowUpdate = false;
 
-type StateAction = (key: string, value: any) => void;
-
-// 선언된 상태 관리 미니 툴 API
-const createState = (
-  data: State,
-  callback: () => void
-): [Readonly<State>, StateAction] => {
-  let allowUpdate: boolean = false;
-
-  const state: State = new Proxy(data, {
+  const state = new Proxy(data, {
     get(target, prop) {
       return target[prop];
     },
@@ -23,11 +13,12 @@ const createState = (
 
       target[prop] = newValue;
       callback?.();
+
       return true;
     },
   });
 
-  const action: StateAction = (key: string, value: any) => {
+  const action = (key, value) => {
     allowUpdate = true;
     state[key] = value;
     allowUpdate = false;
