@@ -1,0 +1,8 @@
+.TermAndConditions {
+  margin-inline: 80px;
+  font-family: pretendard;
+
+  button {
+    margin-block-start: 20px;
+  }
+}
