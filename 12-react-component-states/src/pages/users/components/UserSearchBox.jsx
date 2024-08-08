@@ -1,23 +1,29 @@
 import { useId } from 'react';
-import { string, func } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 import './UserSearchBox.css';
+import { debounce, throttle } from '@/utils';
 
 UserSearchBox.propTypes = {
   searchTerm: string.isRequired,
-  onSearch: func, // optional
+  isInstantSearch: bool,
+  onSearch: func,
+  onReset: func,
 };
 
-function UserSearchBox({ searchTerm, onSearch }) {
+function UserSearchBox({
+  searchTerm,
+  isInstantSearch = false,
+  onSearch,
+  onReset,
+}) {
   const id = useId();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Side Effects
-    // DOM 접근, 속성 값 읽기
+
     const input = document.getElementById(id);
-    const value = input.value.trim();
     const button = input.closest('form').querySelector('[type="submit"]');
-    console.log(button);
+    const value = input.value.trim();
 
     if (value.length > 0) {
       onSearch?.(value);
@@ -25,13 +31,39 @@ function UserSearchBox({ searchTerm, onSearch }) {
       button.focus();
     } else {
       alert('검색어를 입력해주세요.');
-      input.focus();
       input.value = '';
+      input.focus();
     }
   };
 
+  const handleReset = () => {
+    onReset?.();
+    const input = document.getElementById(id);
+    input.focus();
+  };
+
+  let handleChange = null;
+
+  if (isInstantSearch) {
+    // (e) => onSearch?.(e.target.value)
+    // 잦은 리랜더 유발하므로 debounce로 제어하기
+
+    // handleChange = debounce((e) => {
+    //   onSearch?.(e.target.value);
+    // }, 1000);
+
+    // throttle로 제어하기
+    handleChange = throttle((e) => {
+      onSearch?.(e.target.value);
+    }, 1000);
+  }
+
   return (
-    <form className="UserSearchBox">
+    <form
+      className="UserSearchBox"
+      onSubmit={handleSearch}
+      onReset={handleReset}
+    >
       <div className="control">
         <label htmlFor={id}>사용자 검색</label>
         <input
@@ -40,13 +72,26 @@ function UserSearchBox({ searchTerm, onSearch }) {
           placeholder="사용자 정보 입력"
           defaultValue={searchTerm}
           // value={searchTerm}
-          // onChange={handleChange}
+          onChange={handleChange}
           // readOnly
         />
       </div>
-      <button type="submit" onClick={handleSearch}>
+
+      {/* 조건부 표시가 더 나은 선택 */}
+      <button hidden={isInstantSearch} type="submit">
         찾기
       </button>
+      <button hidden={isInstantSearch} type="reset">
+        목록 초기화
+      </button>
+
+      {/* 조건부 렌더링은 토글이 잦을 경우, 렌더링 비용 발생 */}
+      {/* {isInstantSearch ? null : (
+        <>
+          <button type="submit">찾기</button>
+          <button type="reset">목록 초기화</button>
+        </>
+      )} */}
     </form>
   );
 }
