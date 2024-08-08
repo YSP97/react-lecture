@@ -3,6 +3,7 @@ import usersData from '@/data/users';
 
 export function getNoteList() {
   return notesData.map((note) => {
+    // 만약 usersData랑 notesData(노트가 있는 유저 데이터)가 일치하면
     const user = usersData.find((user) => user.id === note.userId);
     if (user) {
       note.expand = { user };
