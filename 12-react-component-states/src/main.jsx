@@ -1,7 +1,7 @@
-import '@/styles/main.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import Playground from './Playground';
+import '@/styles/main.css';
 
 const container = document.getElementById('react-app');
 

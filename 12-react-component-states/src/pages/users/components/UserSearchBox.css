@@ -1,10 +1,11 @@
 .UserSearchBox {
   display: flex;
-  align-items: center;
+  align-items: end;
+  gap: 8px;
 
   .control {
     display: inline-flex;
-
+    flex-flow: column;
     gap: 4px;
   }
 }
