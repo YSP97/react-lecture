@@ -1,7 +1,8 @@
-export function debounce(callback, timeout = 500) {
+export function debounce(callback, timeout = 400) {
   let cleanup = null;
+
   return (...args) => {
     clearTimeout(cleanup);
-    setTimeout(callback.bind(null, ...args), timeout);
+    cleanup = setTimeout(callback.bind(null, ...args), timeout);
   };
 }

@@ -8,12 +8,11 @@ export function convertHTMLToText(htmlString) {
 }
 
 export function convertTextToHTMLString(text, tagName = 'p') {
-  return /\s+/g
-    .exec(text)
-    .input.split('\n')
+  return text
+    .split('\n')
     .filter(Boolean)
     .reduce(
-      (htmlString, text) => htmlString + `<${tagName}>${text}</${tagName}>`,
+      (htmlString, line) => htmlString + `<${tagName}>${line}</${tagName}>`,
       ''
     );
 }

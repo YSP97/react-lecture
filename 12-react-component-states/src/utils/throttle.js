@@ -3,11 +3,11 @@ export function throttle(callback, timeout = 400) {
 
   return (...args) => {
     if (!isCalled) {
-      isCalled = true;
       setTimeout(() => {
         callback.apply(null, args);
         isCalled = false;
       }, timeout);
+      isCalled = true;
     }
   };
 }

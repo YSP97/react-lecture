@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { string, bool, func } from 'prop-types';
 import './UserSearchBox.css';
-import { debounce, throttle } from '@/utils';
+import { throttle } from '@/utils';
 
 UserSearchBox.propTypes = {
   searchTerm: string.isRequired,
@@ -45,17 +45,14 @@ function UserSearchBox({
   let handleChange = null;
 
   if (isInstantSearch) {
+    // 잦은 리-렌더 유발
     // (e) => onSearch?.(e.target.value)
-    // 잦은 리랜더 유발하므로 debounce로 제어하기
 
-    // handleChange = debounce((e) => {
-    //   onSearch?.(e.target.value);
-    // }, 1000);
+    // 리-렌더 쓰로틀링 처리 (사용자가 입력 중이더라도 0.6초마다 검색 실행)
+    handleChange = throttle((e) => onSearch?.(e.target.value), 600);
 
-    // throttle로 제어하기
-    handleChange = throttle((e) => {
-      onSearch?.(e.target.value);
-    }, 1000);
+    // 리-렌더 디바운싱 처리 (사용자가 0.2초라도 멈칫하면 검색 실행)
+    // handleChange = debounce((e) => onSearch?.(e.target.value), 200);
   }
 
   return (
