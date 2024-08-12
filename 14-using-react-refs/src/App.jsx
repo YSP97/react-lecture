@@ -6,6 +6,7 @@ import routes from '@/routes';
 function App() {
   return (
     <div className={S.component}>
+      {/* 경로 안내자(루트 분석해 페이지 컴포넌트 설정) */}
       <RouterProvider navigation={<GlobalNav />} routes={routes} />
     </div>
   );
