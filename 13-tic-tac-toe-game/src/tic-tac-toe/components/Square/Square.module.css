@@ -1,6 +1,7 @@
 .component {
   width: var(--square-size, 42px);
   height: var(--square-size, 42px);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,5 +9,5 @@
   border: 0.1px solid var(--primary-color, #111);
   padding: 0;
   color: var(--primary-color, #111);
-  font-size: 20px;
+  font-size: 38px;
 }

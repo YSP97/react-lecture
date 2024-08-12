@@ -3,12 +3,7 @@ body {
   background: #f4f4f4;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
   margin: 0;
   font-weight: 400;
 }
@@ -17,12 +12,10 @@ button {
   cursor: pointer;
   line-height: 1;
 
-  opacity: 0.75;
-
   &:hover:not(:disabled) {
-    opacity: 1;
+    opacity: 0.9;
   }
-
+  
   &:disabled {
     cursor: not-allowed;
   }
