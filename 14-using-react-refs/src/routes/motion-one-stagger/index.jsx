@@ -9,11 +9,21 @@
 import { useState } from 'react';
 import SoccorBall from './components/SoccorBall';
 import S from './style.module.css';
+import { animate, stagger } from 'motion';
 
 function MotionOneStagger() {
-  const [balls] = useState(Array(4).fill(null));
+  const [balls] = useState(Array(6).fill(null));
 
-  const handleAnimateBalls = () => {};
+  const handleAnimateBalls = () => {
+    // 축구공 객체 참조
+    const balls = document.querySelectorAll('[data-testid="soccor-ball"]');
+
+    animate(
+      balls,
+      { x: [0, 400, 0], rotate: [0, 360, -360 * 2] },
+      { duration: 2, delay: stagger(0.3) }
+    );
+  };
 
   return (
     <main className={S.component}>
