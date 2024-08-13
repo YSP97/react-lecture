@@ -3,7 +3,7 @@
 // --------------------------------------------------------------------------
 // - [x] 함수 지역 변수 또는 함수 vs. 클래스 인스턴스 멤버(변수, 함수)
 // - [x] 리-렌더 없이 컴포넌트 내부의 데이터를 기억하는 방법 (useRef 훅)
-// - [ ] useState() 훅으로 리-렌더 없이 기억하기
+// - [x] useState() 훅으로 리-렌더 없이 기억하기 (useState 훅으로 useRef 흉내내기)
 // --------------------------------------------------------------------------
 
 import { useId, useRef, useState } from 'react';
@@ -24,7 +24,7 @@ function RememberWithoutReRender() {
   // 함수 내 데이터 기억하는 방법
   // 1. useState() 훅 함수 사용 (메모이제이션, 외부에 데이터 기억 저장/읽기)
   //    필연적으로 리액트로 하여금 다시 컴포넌트를 리-렌더하도록 요청
-  let [message, setMessage] = useState(''); // return [state, setState] [Immutable]
+  const [message, setMessage] = useState(''); // return [state, setState] [Immutable]
 
   const handleStateChange = ({ target: { value } }) => {
     setMessage(value);
@@ -32,8 +32,8 @@ function RememberWithoutReRender() {
   //
   // 2. useRef() 훅 함수 사용 (메모이제이션, 외부에 데이터 기억 저장/읽기)
   //    현재(current) 기억된 값이 변경되더라도 기억은 하지만, 리-렌더하도록 요청하지 않음
-  // const messageRef = useRef('멋사! 광화문으로 가자!'); // return Plain Object { current: value } [Mutable]
-  const [messageRef] = useState({ current: '멋사 광화문으로~' }); // 안에 든 값은 일반 자바스크립트 객체이기 때문에 내부 속성값을 변경해도 상관없다
+  const messageRef = useRef('멋사! 광화문으로 가자!'); // return Plain Object { current: value } [Mutable]
+  // const [messageRef] = useState({ current: '멋사! 광화문으로 가자!' }); // state { current: mutableValue }
 
   // 이벤트 핸들러 (사용자 입력에 의해 실행되는 함수)
   const handleRefChange = ({ target: { value } }) => {

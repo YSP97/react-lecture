@@ -2,8 +2,9 @@ import { bool } from 'prop-types';
 import { CardLinkItemType } from '../types/CardLinkList';
 import S from './CardLinkItem.module.css';
 import VanillaTilt from 'vanilla-tilt';
+import { useRef } from 'react';
 
-const VANILLA_TILT_OPTIONS = {
+const TILT_CONFIG = {
   // 기울이는 방향을 반대로 변경
   reverse: true,
   // 최대 기울기 회전(도°)
@@ -69,36 +70,66 @@ function CardLinkItem({ item, popup = false, external = false }) {
     };
   }
 
-  // 리액트 탈출 방식(브라우저 돔에 접근하는 방식)
-  // ref Callback(참조 콜백): 실제 DOM에 렌더링 된 이후 HTML 요소에 접근 가능
-  // 리액트에서 렌더 트리를 생성하고 리액트 돔에서 실제 돔에 렌더링 함 -> (mount 시점)ref 콜백 함수 실행
-  const refCallback = (/* domElementNode */ el) => {
-    // 실제 돔 요소 접근 가능!
-    // 바닐라 tilt 이펙트 적용해보자
+  // useRef() 훅을 사용해 리액트 렌더링 프로세스와 상관없는 뭔가를 기억하고자 한다.
+  // 여기서 뭔가란? DOM 요소 참조 (with useRef() 훅)
+  const titleRef = useRef(null); // { current: null }
 
-    // Instance 반환함
-    const vanillaTiltInstance = new VanillaTilt(el);
-    console.log(vanillaTiltInstance);
+  // React 탈출구 방식
+  // 실제 DOM에 렌더링 된 이후, HTML 요소에 접근 가능
+  // 리액트 -> 렌더 트리 생성 -> 리액트 돔 => 실제 DOM 렌더링 -> [마운트] ref 콜백 함수 실행
+  // 참조 콜백(ref callback)
+  const refCallback = (el /* domElementNode */) => {
+    // 실제 DOM 요소 노드 접근 가능!!!
+    // Vanilla Tilt 이펙트 적용
 
-    VanillaTilt.init(el, VANILLA_TILT_OPTIONS);
+    if (el) {
+      // 리-렌더 없이 DOM 요소 참조
+      // titleRef.current = el.querySelector(`.${S.title}`);
+      // console.log({ titleElement: titleRef.current });
+
+      // titleRef.current.style.opacity = '0';
+
+      // const vanillaTiltInstance = new VanillaTilt(el);
+      // console.log('Vanilla Tilt 이펙트 적용!');
+      VanillaTilt.init(el, TILT_CONFIG);
+      // console.log(el.vanillaTilt);
+    }
+  };
+
+  // 이벤트 핸들러
+  // 외부 시스템인 DOM 요소에 접근, 조작
+  // 사용자 액션이 요구에 반응
+  const handleEnter = () => {
+    // 리액트의 방식이 아닌, 바닐라 스크립트 방식!
+    const title = titleRef.current;
+    title.style.opacity = '1';
+    // 접근성 관점에서 매우 중요!!!
+    // title.closest('a').focus();
+  };
+
+  const handleLeave = () => {
+    titleRef.current.style.opacity = '0';
   };
 
   return (
     <a
-      // JSX에 사용 가능한 특수한 속성: key, ref
+      // JSX에 사용 가능한 특수한 속성
+      // key, ref
       key={'identity'}
       ref={refCallback}
       className={S.component}
       aria-label={label}
       title={label}
       href={href}
+      onPointerEnter={handleEnter}
+      onPointerLeave={handleLeave}
       {...externalLinkProps}
     >
       <figure className={cardClassNames}>
         <div className={S.wrapper}>
           <img className={S.coverImage} src={images.cover} alt="" />
         </div>
-        <img className={S.title} src={images.title} alt="" />
+        <img ref={titleRef} className={S.title} src={images.title} alt="" />
         <img className={S.character} src={images.character} alt="" />
       </figure>
     </a>

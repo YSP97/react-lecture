@@ -1,6 +1,5 @@
 .component {
   h1 {
-    color: blue;
-
+    color: var(--accent-color, #6f51d0);
   }
 }
