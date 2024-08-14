@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import ChatWindow from './components/ChatWindow';
 import S from './style.module.css';
+
 const INITIAL_CHAT_MESSAGES = [
   { id: 'chat-1', message: '오늘 저녁에 뭐 먹을까?', isMe: false },
   { id: 'chat-2', message: '오늘? 저녁에? 뭐 먹지?', isMe: true },
@@ -21,19 +22,36 @@ const INITIAL_CHAT_MESSAGES = [
 ];
 
 function UsingImperativeHandle() {
-  const [chatMessages, setchatMessages] = useState(INITIAL_CHAT_MESSAGES);
+  // [상태] 채팅 메시지 목록 데이터
+  const [chatMessages, setChatMessages] = useState(INITIAL_CHAT_MESSAGES);
+  // 하위 컴포넌트의 명령형 핸들에 접근 가능한 객체 참조
+  const imperativeHandleRef = useRef(null); // { current: null }
 
+  // [상태 업데이트] 채팅 메시지 목록에 새 메시지 추가 기능
   const handleAddMessage = (message) => {
-    console.log('상태 업데이트 요청!');
+    const nextChatIndex = chatMessages.length + 1;
+
     const newMessage = {
-      id: `chat-${chatMessages.length + 1}`,
-      message,
+      id: `chat-${nextChatIndex}`,
       isMe: true,
+      message,
     };
-    setchatMessages((messages) => [...messages, newMessage]);
+
+    setChatMessages((messages) => [...messages, newMessage]);
   };
+
+  // 사이드 이펙트
+  // 이벤트 핸들러
+  // ref 콜백 함수 (마운트 되는 시점에 실행: mounted)
+  // 이펙트 콜백 함수
+
+  const mountedMainElement = () => {
+    const imperativeHandles = imperativeHandleRef.current;
+    imperativeHandles.scrollDownList?.();
+  };
+
   return (
-    <main className={S.component}>
+    <main className={S.component} ref={mountedMainElement}>
       <h1 className={S.headline} lang="en">
         상위 컴포넌트에 명령형 핸들 노출하기
       </h1>
@@ -65,7 +83,11 @@ function UsingImperativeHandle() {
           훅을 사용합니다. 이 훅을 사용하는 방법을 학습합니다.
         </p>
       </div>
-      <ChatWindow messages={chatMessages} onAdd={handleAddMessage} />
+      <ChatWindow
+        $$ref={imperativeHandleRef}
+        messages={chatMessages}
+        onAddMessage={handleAddMessage}
+      />
     </main>
   );
 }
