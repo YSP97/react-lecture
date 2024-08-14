@@ -7,8 +7,6 @@
 
 import { oneOf, string } from 'prop-types';
 import S from './Progress.module.css';
-import { useRef } from 'react';
-import { animate, scroll } from 'motion';
 
 ProgressBar.propTypes = {
   containerSelector: string,
@@ -16,31 +14,13 @@ ProgressBar.propTypes = {
 };
 
 function ProgressBar({ containerSelector = null, axis = 'y' }) {
-  // 사용자의 액션 이벤트 X => 마운트 시점에 실행될 콜백함수가 필요하다 refCallback
-
-  const progressBarRef = useRef(null);
-  const outputRef = useRef(null);
-  const setProgressBar = () => {
-    const container = document.querySelector(`${containerSelector}`);
-    const scrollOptions = { container, axis };
-
-    // 스크롤 애니메이션 설정
-    // API1: scroll()
-
-    // API2
-    scroll(({ y: { progress } }) => {
-      progressBarRef.current.style.transform = `scaleX(${progress})`;
-      outputRef.current.value = (progress * 100).toFixed(0) + '%';
-    }, scrollOptions);
-  };
+  console.log(containerSelector, axis);
 
   return (
-    <div ref={setProgressBar}>
-      <div className={S.progress} ref={progressBarRef} />
-      <output className={S.output} ref={outputRef}>
-        0%
-      </output>
-    </div>
+    <>
+      <div className={S.progress} />
+      <output className={S.output}>0%</output>
+    </>
   );
 }
 

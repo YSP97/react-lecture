@@ -24,22 +24,15 @@ function AnimateDemo() {
 
     // animate(target, props, options?)
     // animate(element, { transform: 'translateX(400px) rotate(360deg)' })
-    animate(element, { x: 400, rotate: 360 }, { duration: 4 });
+    animate(
+      element, 
+      { x: 400, rotate: 360 }, 
+      { duration: 4 }
+    );
   };
 
-  const progrssRef = useRef(null); // 실제 돔에 마운트되면 -> {current: HTTMElement}
+  const handleProgressAnimate = () => {};
 
-  const handleProgressAnimate = () => {
-    console.log(progrssRef);
-    const progressAnimaion = (progress) => {
-      console.log(progress);
-    };
-    const options = {
-      duration: 5,
-    };
-    animate(progressAnimaion, options);
-  };
-  console.log(progrssRef);
   return (
     <div className={S.component}>
       <button className={S.button} type="button" onClick={handleMoveAnimate}>
@@ -56,9 +49,7 @@ function AnimateDemo() {
         >
           진행률 애니메이션
         </button>
-        <output ref={progrssRef} className={S.output}>
-          0%
-        </output>
+        <output className={S.output}>0%</output>
       </div>
     </div>
   );
