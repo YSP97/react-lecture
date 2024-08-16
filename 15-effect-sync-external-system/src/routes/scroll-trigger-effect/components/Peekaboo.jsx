@@ -2,14 +2,14 @@
 // ✅ 스크롤 트리거 이펙트
 // --------------------------------------------------------------------------
 // - [x] 코드 해설
-// - [ ] sectionMapRef 참조 객체에 순환된 <section> 요소를 Map 데이터로 수집합니다.
-// - [ ] 랜덤 <section> 요소가 뷰포트 안에 들어왔는 지 확인합니다. (IntersectionObserver)
-// - [ ] 랜덤 <section> 요소가 뷰포트 안에 있으면 피카부(까꿍) 애니메이션 발동되도록 구현합니다.
+// - [x] sectionMapRef 참조 객체에 순환된 <section> 요소를 Map 데이터로 수집합니다.
+// - [x] 랜덤 <section> 요소가 뷰포트 안에 들어왔는 지 확인합니다. (IntersectionObserver)
+// - [x] 랜덤 <section> 요소가 뷰포트 안에 있으면 피카부(까꿍) 애니메이션 발동되도록 구현합니다.
 // --------------------------------------------------------------------------
 
 import { useEffect, useRef, useState } from 'react';
 import { animate, spring } from 'motion';
-import { getRandomMinMax } from '/utils';
+import { getRandomMinMax } from '@/utils';
 import S from './Peekaboo.module.css';
 
 function Peekaboo() {
@@ -56,36 +56,39 @@ function Peekaboo() {
 
   // 스크롤 트리거 이펙트
   useEffect(() => {
+    console.log({ randomIndex });
+
     const targetIndex = randomIndex - 1;
-    const targetSectionEL = Array.from(sectionsRef.current.values())[
-      targetIndex
-    ];
+    const targetSectionElements = Array.from(sectionsRef.current.values());
+    const targetSectionElement = targetSectionElements.at(targetIndex);
+
+    // 인터섹션 옵저버 객체 생성
     const intersectionObserver = new IntersectionObserver((entries) => {
       const entry = entries[0];
+
+      // 교차했는가? 즉, 뷰포트 안에 관찰 대상이 진입한 상태인가? true or false
       if (entry.isIntersecting) {
-        console.log('뷰포트에 관찰대상이 들어옴!');
+        console.log('뷰포트 안에 관찰 대상이 보인다.');
         setPeekaboo(true);
       } else {
+        console.log('뷰포트 안에 관찰 대상이 안보인다.');
         setPeekaboo(false);
-        console.log('뷰포트 안에 관찰대상이 없음!');
       }
-
-      console.log(entry.isIntersecting);
     });
 
-    // 관찰대상 -> 뷰포트 안에 관찰 대상이 진입했는 지, 진출했는 지 감지
-    console.log(targetSectionEL);
+    // 인터섹션 옵저버 객체 관찰 대상 설정
+    // 뷰포트 안에 관찰 대상이 진입(enter)했는 지, 진출(leave)했는 지 감지
+    intersectionObserver.observe(targetSectionElement);
 
-    intersectionObserver.observe(targetSectionEL);
-
+    // 클린업(정리)
     return () => {
-      intersectionObserver.unobserve(targetSectionEL);
+      // 인터섹션 옵저버 객체가 관찰하는 것을 중단 설정
+      intersectionObserver.unobserve(targetSectionElement);
     };
   }, [randomIndex]);
 
   // ref 참조 { current: 섹션 집합 수집 }
-  // 1. Map
-  // 2. Array
+  // - Map 데이터 활용
 
   const sectionsRef = useRef(null); // { current: null }
 

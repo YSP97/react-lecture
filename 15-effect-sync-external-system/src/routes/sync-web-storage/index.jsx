@@ -8,7 +8,7 @@
 import { useEffect, useState } from 'react';
 import Switcher from './components/Switcher';
 import S from './style.module.css';
-import { getStorageData, setStorageData } from '/utils/index.js';
+import { getStorageData, setStorageData } from '@/utils';
 
 const DARK_MODE_KEY = '@theme/dark';
 
@@ -35,14 +35,17 @@ function SyncWebStorage() {
     // 웹(로컬 or 세션) 스토리지에 변경된 반응성 데이터를 키:값 형태로 저장한다.
     // 웹 스토리지에 데이터를 저장할 땐 [ String ] 포멧으로 저장해야 한다.
     // localStorage.setItem(DARK_MODE_KEY, JSON.stringify(isDarkMode));
-    setStorageData(DARK_MODE_KEY, isDarkMode);
+    // setStorageData(DARK_MODE_KEY, isDarkMode);
   }, [isDarkMode]);
 
+  // [이벤트]
+  // 외부 시스템에 상태 저장 (반영구적 기억)
   const handleSaveDarkMode = () => {
-    setStorageData(DARK_MODE_KEY, isDarkMode);
     // localStorage.setItem(DARK_MODE_KEY, JSON.stringify(isDarkMode));
+    setStorageData(DARK_MODE_KEY, isDarkMode);
   };
 
+  // 리액트 앱에 상태 변겨 요청 (휘발성 기억)
   // 사용자 액션에 따라 다크/라이트 모드 전환 기능
   const handleToggleDarkMode = (nextIsDarkMode) => {
     setIsDarkMode(nextIsDarkMode);
@@ -60,7 +63,12 @@ function SyncWebStorage() {
         </p>
         <p>이펙트를 사용해 스토리지 데이터를 리액트 앱과 동기화 해봅니다.</p>
 
-        <button type="button" className={S.button} onClick={handleSaveDarkMode}>
+        <button
+          type="button"
+          className={S.button}
+          onClick={handleSaveDarkMode}
+          style={{ marginBlockStart: 8 }}
+        >
           테마 저장
         </button>
       </div>
