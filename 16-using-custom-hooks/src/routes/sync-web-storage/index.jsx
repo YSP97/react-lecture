@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
+import { getStorageData, setStorageData } from '@/utils';
 import Switcher from './components/Switcher';
 import S from './style.module.css';
-import { getStorageData, setStorageData } from '@/utils';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 
 const DARK_MODE_KEY = '@theme/dark';
 

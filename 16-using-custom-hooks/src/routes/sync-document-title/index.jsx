@@ -1,9 +1,9 @@
-
-import Counter from './components/Counter';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
+import Counter from './components/Counter';
 
 function SyncDocumentTitle() {
   useDocumentTitle('문서 제목 동기화');
+
   return (
     <main id="page">
       <h1 className="headline">문서 제목 동기화</h1>

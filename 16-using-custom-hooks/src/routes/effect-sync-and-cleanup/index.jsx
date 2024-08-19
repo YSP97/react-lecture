@@ -13,6 +13,7 @@ const SUBJECTS = {
 
 function EffectSyncAndCleanup() {
   useDocumentTitle('이펙트 동기화 & 정리');
+
   const [subject, setSubject] = useState(SUBJECTS.MOUSE);
 
   const [isClockOn, setIsClockOn] = useState(false);
