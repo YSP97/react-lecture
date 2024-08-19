@@ -7,42 +7,17 @@ const ENDPOINT = '//yamoo9.pockethost.io/api/collections/olive_oil/records';
 
 function DataFetching() {
   const [state, setState] = useImmer({
-    keyPoint: '상태가 복잡해지면 관리도 덩달아 어려워진다.',
-    stateData: {
-      one: {
-        isLoading: false,
-        error: null,
-        data: null,
-      },
-    },
-    two: {
-      three: {
-        four: {
-          five: 'deep state object',
-        },
-      },
-    },
+    isLoading: false,
+    error: null,
+    data: null,
   });
 
   useEffect(() => {
     const abortController = new AbortController();
 
-    // useImmer 관리 코드
     setState((draft) => {
-      draft.stateData.one.isLoading = true;
+      draft.isLoading = true;
     });
-
-    // useState 관리 코드
-    // setState((prevState) => ({
-    //   ...prevState,
-    //   stateData: {
-    //     ...prevState.stateData,
-    //     one: {
-    //       ...prevState.stateData.one,
-    //       isLoading: true,
-    //     },
-    //   },
-    // }));
 
     const fetchOliveOil = async () => {
       try {
@@ -56,44 +31,16 @@ function DataFetching() {
           throw new Error(responseData.message);
         }
 
-        // useImmer 관리 코드
         setState((draft) => {
-          draft.stateData.one.data = responseData;
-          draft.stateData.one.isLoading = false;
+          draft.data = responseData;
+          draft.isLoading = false;
         });
-
-        // useState 관리 코드
-        // setState((prevState) => ({
-        //   ...prevState,
-        //   stateData: {
-        //     ...prevState.stateData,
-        //     one: {
-        //       ...prevState.stateData.one,
-        //       data: responseData,
-        //       isLoading: false,
-        //     },
-        //   },
-        // }));
       } catch (error) {
         if (!(error instanceof DOMException)) {
-          // useImmer 관리 코드
           setState((draft) => {
-            draft.stateData.one.error = error;
-            draft.stateData.one.isLoading = false;
+            draft.error = error;
+            draft.isLoading = false;
           });
-
-          // useState 관리 코드
-          // setState((prevState) => ({
-          //   ...prevState,
-          //   stateData: {
-          //     ...prevState.stateData,
-          //     one: {
-          //       ...prevState.stateData.one,
-          //       error,
-          //       isLoading: false,
-          //     },
-          //   },
-          // }));
         }
       }
     };
@@ -105,18 +52,18 @@ function DataFetching() {
     };
   }, [setState]);
 
-  if (state.stateData.one.isLoading) {
+  if (state.isLoading) {
     return <LoadingMessage />;
   }
 
-  if (state.stateData.one.error) {
-    return <PrintError error={state.stateData.one.error} />;
+  if (state.error) {
+    return <PrintError error={state.error} />;
   }
 
   return (
     <div className={S.component}>
       <ul>
-        {state.stateData.one.data?.items.map?.((item) => (
+        {state.data?.items.map?.((item) => (
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
