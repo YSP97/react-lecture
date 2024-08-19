@@ -1,20 +1,21 @@
-import { useId, useState, useEffect } from 'react';
+import { useId, useState } from 'react';
 import S from './Counter.module.css';
 import { getStorageData, setStorageData } from '@/utils';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 
-const DOCUMENT_INITIAL_TITLE = '문서 제목 동기화';
 const COUNTER_COUNT = '@counter/count';
 const COUNTER_STEP = '@counter/step';
+const DOCUMENT_INITIAL_TITLE = '문서 제목 동기화';
 
 function Counter() {
   const id = useId();
-
   const [count, setCount] = useState(() =>
     getStorageData(COUNTER_COUNT, 0, 'session')
   );
-  useEffect(() => {
-    document.title = `(${count}) ` + DOCUMENT_INITIAL_TITLE;
-  }, [count]);
+
+  // 파생된 상태+커스텀 훅(useDocumentTitle) ->  documentTitle값이 변경될때마다 useDocumentTitle 내부 이벤트 함수 실행
+  const documentTitle = `(${count})` + DOCUMENT_INITIAL_TITLE;
+  useDocumentTitle(documentTitle);
 
   const [step, setStep] = useState(() =>
     getStorageData(COUNTER_STEP, 1, 'session')
