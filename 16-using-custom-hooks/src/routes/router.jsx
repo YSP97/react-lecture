@@ -16,6 +16,7 @@ import PrintMousePosition from './effect-sync-and-cleanup/components/PrintMouseP
 import UselessCheckbox from './effect-sync-and-cleanup/components/UselessCheckbox';
 import ClockOnOff from './effect-sync-and-cleanup/components/ClockOnOff';
 import CheckOnOffline from './check-on-offline';
+import DataFetchUsingUseFetchHook from './data-fetch-using-use-fetch-hook';
 
 // 루트(경로 집합)
 const routes = [
@@ -41,6 +42,7 @@ const routes = [
       { path: 'scroll-trigger-effect', element: <ScrollTriggerEffect /> },
       { path: 'sync-backend', element: <SyncBackend /> },
       { path: 'check-on-offline', element: <CheckOnOffline /> },
+      { path: 'data-fetching', element: <DataFetchUsingUseFetchHook /> },
     ],
   },
 ];
