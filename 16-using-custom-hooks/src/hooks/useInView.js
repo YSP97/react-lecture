@@ -11,6 +11,7 @@ export default function useInView() {
     // 인터섹션 옵저버 생성하여 관찰 대상을 관찰하도록 하자!
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0]; // 가장 먼저 교차 상태가 변경된 요소에 대한 정보
+      // entries: 관찰 중인 요소들의 교차 상태 정보를 담은 배열
 
       console.log(entry);
 
