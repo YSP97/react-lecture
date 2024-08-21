@@ -4,6 +4,8 @@ import { navigationItems } from '@/router';
 import S from './style.module.css';
 
 function GlobalNav() {
+  // 불변 데이터(스냅샷)을 위해 state 정의
+  // 리-렌더링이 되더라도 캐싱된(기억된) 값을 그대로 사용됨
   const [navigationList] = useState(navigationItems);
 
   return (

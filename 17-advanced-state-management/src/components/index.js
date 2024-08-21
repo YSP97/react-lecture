@@ -6,3 +6,7 @@ export { default as AppSwitch } from './AppSwitch';
 export { default as AppButton } from './AppButton';
 export { default as AppInput } from './AppInput';
 export { default as AppForm } from './AppForm';
+export { default as AppLink } from './AppLink';
+export { default as AppDevider } from './AppDevider';
+
+// 공용 컴포넌트

@@ -2,12 +2,14 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import TimeAndCounter from './components/TimeAndCounter';
 import TodoListApp from './components/TodoListApp';
 import S from './style.module.css';
+import { AppDevider, AppLink } from '@/components';
 
 function OptimizingRenders() {
   useDocumentTitle('렌더링(성능) 최적화');
 
   return (
     <main id="page" className={S.component}>
+      {/* 메인은 반드시 하나만 존재해야함! */}
       <h1 className="headline">렌더링(성능) 최적화</h1>
       <div className="description">
         <p>
@@ -16,33 +18,27 @@ function OptimizingRenders() {
         </p>
         <p>
           참고:{' '}
-          <a
+          <AppLink
             href="https://ko.react.dev/reference/react/useCallback"
-            rel="noreferrer"
-            target="_blank"
+            isExternal
           >
             useCallback()
-          </a>
+          </AppLink>
           ,
-          <a
+          <AppLink
             href="https://ko.react.dev/reference/react/useMemo"
-            rel="noreferrer"
-            target="_blank"
+            isExternal
           >
             useMemo()
-          </a>
+          </AppLink>
           ,
-          <a
-            href="https://ko.react.dev/reference/react/memo"
-            rel="noreferrer"
-            target="_blank"
-          >
+          <AppLink href="https://ko.react.dev/reference/react/memo" isExternal>
             memo()
-          </a>
+          </AppLink>
         </p>
       </div>
 
-      <div className="divider" />
+      <AppDevider />
 
       <h2 className="headline2">Time &amp; Counter</h2>
       <div className="description">
@@ -54,7 +50,7 @@ function OptimizingRenders() {
 
       <TimeAndCounter />
 
-      <div className="divider" />
+      <AppDevider />
 
       <h2 className="headline2">Todo List</h2>
       <div className="description">
