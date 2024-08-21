@@ -16,39 +16,6 @@ function TimeAndCounter() {
   const { time, turnOn, onOff } = useClock();
   useRenderCountLog('TimeAndCounter', '#538b4f', 800, 20);
 
-  const memotyRef = useRef({
-    handleToggleTime: null,
-    label: null,
-  });
-
-  useEffect(() => {
-    // 이전 기억된 값과 현재의 값을 비교
-    if (Object.is(label, memotyRef.current.label)) {
-      console.log(
-        '현재 렌더링 시점의 label 값은 이전 시점의 기억된 label과 동일하다'
-      );
-    } else {
-      console.log(
-        '현재 렌더링 시점의 label 값은 이전 시점의 기억된 label과 다르다'
-      );
-    }
-    if (Object.is(handleToggleTime, memotyRef.current.handleToggleTime)) {
-      console.log(
-        '현재 렌더링 시점의 handleToggleTime 함수 값은 이전 시점의 기억된 handleToggleTime과 동일하다'
-      );
-    } else {
-      console.log(
-        '현재 렌더링 시점의 handleToggleTime 함수 값은 이전 시점의 기억된 handleToggleTime과 다르다'
-      );
-    }
-
-    // 현재 값을 기억함(다음 렌더링 시 이전 기억이 됨)
-    memotyRef.current = {
-      label,
-      handleToggleTime,
-    };
-  });
-
   const handleToggleTime = useCallback(() => onOff((c) => !c), [onOff]);
 
   const label = `타임 ${turnOn ? '스톱' : '플레이'}`; // 원시값(불변값)

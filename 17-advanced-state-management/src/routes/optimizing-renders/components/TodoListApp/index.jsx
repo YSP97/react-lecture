@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import S from './style.module.css';
 import ThemeSwitcher from './ThemeSwitcher';
 import TodoList from './TodoList';
@@ -23,13 +23,13 @@ function TodoListApp() {
     setVisibility(visibility);
   };
 
-  const handleChangeThemeColor = (color) => {
+  const handleChangeThemeColor = useCallback((color) => {
     setThemeColor(color);
-  };
+  }, []);
 
-  const handleChangeFocusColor = (color) => {
+  const handleChangeFocusColor = useCallback((color) => {
     setFocusColor(color);
-  };
+  }, []);
 
   const filtered = getFiltered(todos, visibility);
 

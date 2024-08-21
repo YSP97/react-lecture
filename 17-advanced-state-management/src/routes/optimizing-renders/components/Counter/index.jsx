@@ -3,6 +3,7 @@ import useCounter from '@/hooks/useCounter';
 import CountButton from './CountButton';
 import CountOutput from './CountDisplay';
 import S from './style.module.css';
+import { memo } from 'react';
 
 function Counter() {
   const C = useCounter({ min: -5, count: 3, step: 2 });
@@ -36,4 +37,4 @@ function Counter() {
   );
 }
 
-export default Counter;
+export default memo(Counter);

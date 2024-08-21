@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { func } from 'prop-types';
 import S from './style.module.css';
 
@@ -10,9 +10,9 @@ function AddTodo({ setTodos }) {
   const [newTodo, setNewTodo] = useState('');
   const inputRef = useRef(null);
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     setNewTodo(e.target.value.trim());
-  };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,4 +55,4 @@ function AddTodo({ setTodos }) {
   );
 }
 
-export default AddTodo;
+export default memo(AddTodo);
