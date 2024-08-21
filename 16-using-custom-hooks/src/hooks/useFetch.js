@@ -38,15 +38,17 @@ function useFetch(url) {
     setState((draft) => {
       draft.status = 'loading';
     });
+    // useImmer를 사용하여 객체 합성이 필요없이 바로 프로퍼티 변경 가능
 
     // 이펙트 내부의 비동기 함수
     const fetchData = async () => {
       try {
         // 요청 / 응답
         const response = await fetch(url, {
-          signal: abortController.signal,
+          signal: abortController.signal, // abort 메서드가 호출되면 해당 작업 취소하도록(비동기 작업을 중단하기 위한 신호)
           method: 'GET',
           headers: {
+            // 메타데이터 지정: application/json는 본문 형식이 json임을 알려주는 것
             'Content-Type': 'application/json',
           },
         });
@@ -90,6 +92,8 @@ function useFetch(url) {
       abortController.abort();
     };
   }, [url, setState]);
+  // url 변경시 이펙트 실행(setState는 eslint가 반응형 값이라 인지하지만
+  // 이 함수는 변하지 않기 때문에 그냥 eslint 걸리지 말라고 넣어둔 것)
 
   // 3. 반환 값
   // { status, error, data }

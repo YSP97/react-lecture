@@ -9,7 +9,6 @@ export default function DataFetchUsingUseFetchHook() {
   if (status === 'error') {
     return <div>{error}</div>;
   }
-  console.log(data);
   return (
     <main id="page">
       <h1 className="headline">useFetch() 훅을 사용해 데이터 페칭</h1>

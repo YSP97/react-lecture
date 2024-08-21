@@ -5,7 +5,7 @@ import S from './DataFetching.module.css';
 import LoadingMessage from './LoadingMessage';
 import PrintError from './PrintError';
 
-const ENDPOINT = '//yamoo9.pockethost.io/api/collections/olive_oil/records';
+const ENDPOINT = 'https://yunseon.pockethost.io/api/collections/food/records';
 
 const STATE = {
   keyPoint: '상태가 복잡해지면 관리도 덩달아 어려워진다.',
@@ -20,13 +20,14 @@ const STATE = {
     three: {
       four: {
         five: 'deep state object',
+        // immer를 사용한 state 중첩 객체 변경을 위해 이런...엄청나게 중첩된 객체 만들기
       },
     },
   },
 };
 
 function DataFetching() {
-  const [state, setState] = useImmer(STATE);
+  const [state, setState] = useImmer(STATE); // immer를 사용
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -53,6 +54,8 @@ function DataFetching() {
         });
       } catch (error) {
         if (!(error instanceof DOMException)) {
+          // 특정 오류가 브라우저 DOM 과 관련된 에러가 아니라면 상태 -> 에러 처리
+          // instanceof: 객체의 프로토타입 체인을 검사
           setState((draft) => {
             draft.stateData.one.error = error;
             draft.stateData.one.isLoading = false;

@@ -17,6 +17,7 @@ import UselessCheckbox from './effect-sync-and-cleanup/components/UselessCheckbo
 import ClockOnOff from './effect-sync-and-cleanup/components/ClockOnOff';
 import CheckOnOffline from './check-on-offline';
 import DataFetchUsingUseFetchHook from './data-fetch-using-use-fetch-hook';
+import CounterApp from './Counter-app-use-counter-hook';
 
 // 루트(경로 집합)
 const routes = [
@@ -43,6 +44,7 @@ const routes = [
       { path: 'sync-backend', element: <SyncBackend /> },
       { path: 'check-on-offline', element: <CheckOnOffline /> },
       { path: 'data-fetching', element: <DataFetchUsingUseFetchHook /> },
+      { path: 'counter-app', element: <CounterApp /> },
     ],
   },
 ];

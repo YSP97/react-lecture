@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// state + effect Callback custom hook
 /** @type {(initialValue: any, callback?: (nextState: any)=>void) => [state, setState]} */
 export default function useStateWithCallback(initialValue, callback) {
   const [state, setState] = useState(initialValue);

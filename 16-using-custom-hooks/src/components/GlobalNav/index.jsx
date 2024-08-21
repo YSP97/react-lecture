@@ -11,6 +11,7 @@ function GlobalNav() {
     { path: '/sync-backend', text: '백엔드 환경 동기화' },
     { path: '/check-on-offline', text: '온/오프라인 체크' },
     { path: '/data-fetching', text: 'useFetch 훅을 사용해 데이터 페칭' },
+    { path: '/counter-app', text: 'useCounter 훅을 사용해 CounterApp 예제' },
   ]);
 
   return (

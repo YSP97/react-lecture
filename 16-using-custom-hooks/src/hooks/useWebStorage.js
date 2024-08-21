@@ -1,4 +1,17 @@
+// [목표]
+// 특정 데이터가 웹 스토리지에 기억되도록 구현
+
+// [목적]
+// 개발 중 리프레시 상황에 부득이하게 데이터가 유실되는 경험
+// 개발 중에 데이터 유실되지 않고 기억되도록 하는 데 목적
+
+// [사용법]
+// const [state, setState, methods: { getItem, setItem, deleteItem, allClear }] = useLocalStorage('@store/auth', initialValue);
+
 import useStateWithCallback from './useStateWithCallback';
+
+// [옵션] 관리 중인 상태가 변경되면 콜백 함수 실행
+// useStateWithCallback
 
 const { localStorage, sessionStorage } = globalThis;
 
