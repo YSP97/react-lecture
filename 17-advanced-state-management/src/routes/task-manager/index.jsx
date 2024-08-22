@@ -3,7 +3,8 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import TaskManager from './components/TaskManager';
 import S from './style.module.css';
 import { AppLink } from '@/components';
-import { useReducer, useState } from 'react';
+import { useReducer } from 'react';
+import ListManager from './components/ListManager';
 
 // 작업 요청(action) 알림(dispatch)이 오면 리듀서가 일을 합니다.
 // 리듀서는 요청을 수행하여 새로운 상태(state)를 반환함
@@ -46,6 +47,8 @@ function TaskManagerUsingReducer() {
   return (
     <main id="page" className={S.component}>
       <h1 className="headline">태스크 매니저 (리듀서 활용)</h1>
+
+      <ListManager />
 
       <div>
         <h2 className="headline2">인증 정보</h2>
