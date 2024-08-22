@@ -1,12 +1,9 @@
-import { object } from 'prop-types';
+import { useTheme } from '@/contexts/theme';
 import S from './style.module.css';
 import TodoListApp from './TodoListApp';
 
-GrandChild.propTypes = {
-  theme: object,
-};
-
-function GrandChild({ theme }) {
+function GrandChild() {
+  const { theme } = useTheme();
   const {
     GrandChild: { background, label },
   } = theme;
@@ -25,7 +22,7 @@ function GrandChild({ theme }) {
       <strong className={S.label} style={labelStyles}>
         Grand Child
       </strong>
-      <TodoListApp theme={theme} />
+      <TodoListApp  />
     </div>
   );
 }

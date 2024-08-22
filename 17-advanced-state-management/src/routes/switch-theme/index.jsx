@@ -3,14 +3,19 @@ import S from './style.module.css';
 import { AppSwitch } from '@/components';
 import useToggle from '@/hooks/useToggle';
 import GrandParent from './components/GrandParent';
-import { semantics } from '@/theme';
+import { useTheme } from '@/contexts/theme';
+import { useCallback } from 'react';
+import { THEME_MODE } from '@/theme/semantics';
 
 function SwitchTheme() {
   useDocumentTitle('테마 스위치');
 
   const [isDarkMode, setIsDarkMode] = useToggle(false);
-
-  const theme = isDarkMode ? semantics.dark : semantics.light;
+  const { toggleThemeMode } = useTheme();
+  const handleToggleTheme = useCallback(() => {
+    setIsDarkMode((mode) => !mode);
+    toggleThemeMode();
+  }, [setIsDarkMode, toggleThemeMode]);
 
   return (
     <main id="page" className={S.component}>
@@ -39,13 +44,13 @@ function SwitchTheme() {
       </div>
 
       <div style={containerStyles}>
-        <AppSwitch value={isDarkMode} onToggle={setIsDarkMode} ratio={3} />
+        <AppSwitch value={isDarkMode} onToggle={handleToggleTheme} ratio={2} />
         {isDarkMode ? '라이트' : '다크'} 테마 전환
       </div>
 
       <div className="divider" />
 
-      <GrandParent theme={theme} />
+      <GrandParent />
     </main>
   );
 }

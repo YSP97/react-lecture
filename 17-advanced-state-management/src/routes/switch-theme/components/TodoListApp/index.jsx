@@ -1,5 +1,4 @@
 import S from './style.module.css';
-import { object } from 'prop-types';
 import { useLayoutEffect, useState } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
 import TodoList from './TodoList';
@@ -10,12 +9,10 @@ import {
   initialTodos,
   VISIBILITIES,
 } from './@constants';
+import { useTheme } from '@/contexts/theme';
 
-TodoListApp.propTypes = {
-  theme: object,
-};
-
-function TodoListApp({ theme }) {
+function TodoListApp() {
+  const { theme } = useTheme();
   const [todos, setTodos] = useState(initialTodos);
   const [visibility, setVisibility] = useState(VISIBILITIES.ALL);
 

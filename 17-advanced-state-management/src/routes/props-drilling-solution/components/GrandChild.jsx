@@ -1,14 +1,16 @@
+import { useTheme } from '@/contexts/theme';
 import { usePage } from '../context';
 import S from './style.module.css';
 
 function GrandChild() {
   // 컨텍스트 값 가져오기
-  const { message, color } = usePage();
+  const { message } = usePage();
 
+  const { foreground, background } = useTheme(({ theme }) => theme);
   return (
-    <div className={S.box} style={{ backgroundColor: color }}>
+    <div className={S.box} style={{ backgroundColor: background }}>
       <strong className={S.label}>Grand Child</strong>
-      <p>{message}</p>
+      <p style={{ color: foreground }}>{message}</p>
     </div>
   );
 }
