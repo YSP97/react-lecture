@@ -35,15 +35,14 @@ const navigation = [
     path: '/signup-user',
     text: '사용자 회원가입',
     element: <SignUpUser />,
-    display: false, // 회원가입으로 이동은 하는데 화면에 표시하지는 않도록
+    display: false,
   },
 ];
 
 // GlobalNav 컴포넌트에서 사용되는 내비게이션 데이터
 export const navigationItems = navigation
-  .filter((item) => item?.display === undefined) // display=false인 것을 제외한 모든 요소를 렌더링
+  .filter((item) => item?.display === undefined)
   .map(({ path, text }) => ({
-    // GlobalNav에 element 필요없어서
     path,
     text,
   }));
@@ -56,7 +55,7 @@ export const routes = [
     children: navigation.map((item) => {
       const route = { element: item.element };
 
-      if (item.path === '/') route.index = true;
+      if (item.path === '/' && item.path === '') route.index = true;
       else route.path = item.path;
 
       return route;

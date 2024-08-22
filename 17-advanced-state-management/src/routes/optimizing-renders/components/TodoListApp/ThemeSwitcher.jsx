@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { memo, useCallback, useId } from 'react';
+import { memo, useId } from 'react';
 import { func, string } from 'prop-types';
 import { visibilityType } from './@types';
 import { visibilities } from './@constants';
@@ -25,26 +25,17 @@ function ThemeSwitcher({
   const themeColorInputId = useId();
   const focusColorInputId = useId();
 
-  const handleChangeVisibility = useCallback(
-    (visibility) => () => {
-      onChangeVisibility?.(visibility);
-    },
-    [onChangeVisibility]
-  );
+  const handleChangeVisibility = (visibility) => () => {
+    onChangeVisibility?.(visibility);
+  };
 
-  const handleChangeThemeColor = useCallback(
-    (e) => {
-      onChangeThemeColor?.(e.target.value);
-    },
-    [onChangeThemeColor]
-  );
+  const handleChangeThemeColor = (e) => {
+    onChangeThemeColor?.(e.target.value);
+  };
 
-  const handleChangeFocusColor = useCallback(
-    (e) => {
-      onChangeFocusColor?.(e.target.value);
-    },
-    [onChangeFocusColor]
-  );
+  const handleChangeFocusColor = (e) => {
+    onChangeFocusColor?.(e.target.value);
+  };
 
   return (
     <div className={S.ThemeSwitcher}>

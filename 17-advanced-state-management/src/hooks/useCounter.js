@@ -6,15 +6,19 @@ function useCounter({
   min = 0,
   max = 100,
 } = {}) {
-  const [count, setCount] = useState(initialCount);
+  const [count, setCount] = useState(initialCount); // Memoized State (Immutable, Snapshot)
 
-  const isMinDisabled = count <= min;
-  const isMaxDisabled = count >= max;
+  const isMinDisabled = count <= min; // Boolean (Immutable)
+  const isMaxDisabled = count >= max; // Boolean (Immutable)
 
+  // Memoized function (Immutable)
+  // useCallback() vs. useMemo()
+
+  // useCallback() 훅 사용할 경우
+  // 오직 함수 값만 기억
   const reset = useCallback(() => setCount(initialCount), [initialCount]);
-  // 만약 리셋버튼이 있어서 리셋 이벤트를 걸어주려고 하면
-  // 이 함수가 리렌더링시 계속 실행되므로 함수 기억해두는 게 좋음
 
+  // Memoized function (Immutable)
   const increment = useCallback(
     () =>
       setCount((c) => {
@@ -25,6 +29,7 @@ function useCounter({
     [max, step]
   );
 
+  // Memoized function (Immutable)
   const decrement = useCallback(
     () =>
       setCount((c) => {

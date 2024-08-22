@@ -8,10 +8,9 @@ import { semantics } from './theme';
 function SwitchTheme() {
   useDocumentTitle('테마 스위치');
 
-  const [isDarkMode, setIsDarkMode] = useToggle(!true);
+  const [isDarkMode, setIsDarkMode] = useToggle(false);
 
   const theme = isDarkMode ? semantics.dark : semantics.light;
-  console.log(theme);
 
   return (
     <main id="page" className={S.component}>

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { navigationItems } from '@/router';
 import S from './style.module.css';
 
 function GlobalNav() {
-  // 불변 데이터(스냅샷)을 위해 state 정의
-  // 리-렌더링이 되더라도 캐싱된(기억된) 값을 그대로 사용됨
+  // 불변 데이터 (스냅샷)
+  // 리-렌더링 (캐싱된 데이터 값을 그대로 사용)
   const [navigationList] = useState(navigationItems);
 
   return (
@@ -29,4 +29,4 @@ function GlobalNav() {
   );
 }
 
-export default GlobalNav;
+export default memo(GlobalNav);

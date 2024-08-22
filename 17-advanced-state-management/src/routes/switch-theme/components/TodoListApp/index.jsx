@@ -1,6 +1,6 @@
-import { useLayoutEffect, useState } from 'react';
-import { object } from 'prop-types';
 import S from './style.module.css';
+import { object } from 'prop-types';
+import { useLayoutEffect, useState } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
 import TodoList from './TodoList';
 import AddTodo from './AddTodo';

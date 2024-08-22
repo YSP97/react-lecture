@@ -1,15 +1,14 @@
+import { AppDivider, AppLink } from '@/components';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import TimeAndCounter from './components/TimeAndCounter';
 import TodoListApp from './components/TodoListApp';
 import S from './style.module.css';
-import { AppDevider, AppLink } from '@/components';
 
 function OptimizingRenders() {
   useDocumentTitle('렌더링(성능) 최적화');
 
   return (
     <main id="page" className={S.component}>
-      {/* 메인은 반드시 하나만 존재해야함! */}
       <h1 className="headline">렌더링(성능) 최적화</h1>
       <div className="description">
         <p>
@@ -38,7 +37,7 @@ function OptimizingRenders() {
         </p>
       </div>
 
-      <AppDevider />
+      <AppDivider />
 
       <h2 className="headline2">Time &amp; Counter</h2>
       <div className="description">
@@ -50,9 +49,10 @@ function OptimizingRenders() {
 
       <TimeAndCounter />
 
-      <AppDevider />
+      <AppDivider />
 
       <h2 className="headline2">Todo List</h2>
+
       <div className="description">
         <p>
           학습한 내용을 토대로 TodoList 앱의 렌더링 문제를 파악한 후
