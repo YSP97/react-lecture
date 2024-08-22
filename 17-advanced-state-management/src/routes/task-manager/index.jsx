@@ -3,23 +3,44 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import TaskManager from './components/TaskManager';
 import S from './style.module.css';
 import { AppLink } from '@/components';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
+
+// 작업 요청(action) 알림(dispatch)이 오면 리듀서가 일을 합니다.
+// 리듀서는 요청을 수행하여 새로운 상태(state)를 반환함
+const authReducer = (state, action) => {
+  // 액션 요청서
+  // 요청을 식별하여 기능을 수행 -> 수행결과는 다음 상태를 반환해야함
+  console.log(action);
+  if (action.type === 'signIn') {
+    return action.payload;
+  }
+  if (action.type === 'signOut') {
+    return null;
+  }
+};
 
 function TaskManagerUsingReducer() {
   useDocumentTitle('태스크 매니저 (리듀서 활용)');
+  const [authUser, dispatch] = useReducer(authReducer, null);
 
-  const [auth, setAuth] = useState(null);
+  // console.log(authUser);
+
+  // const [authUser, setAuthUser] = useState(null);
 
   const signIn = () => {
-    setAuth({
-      user: {
+    // dispatch(/* 액션(객체, 내부에 타입을 가짐)을 전달 */)
+    dispatch({
+      type: 'signIn',
+      payload: {
+        name: '윤선',
         email: 'pus1072@naver.com',
-        name: '박윤선',
       },
     });
   };
   const signOut = () => {
-    setAuth(null);
+    dispatch({
+      type: 'signOut',
+    });
   };
 
   return (
@@ -28,10 +49,10 @@ function TaskManagerUsingReducer() {
 
       <div>
         <h2 className="headline2">인증 정보</h2>
-        {auth ? (
+        {authUser ? (
           <>
             <p>
-              {auth.user.name}({auth.user.email})
+              {authUser.name}({authUser.email})
             </p>
             <button type="button" onClick={signOut}>
               로그아웃
