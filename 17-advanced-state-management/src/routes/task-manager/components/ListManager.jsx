@@ -29,7 +29,7 @@ function ListManager() {
 
   const handleResetList = () => {
     dispatch(resetList());
-  };
+  }
 
   return (
     <div>
@@ -42,9 +42,7 @@ function ListManager() {
         <button type="button" onClick={handleFilterList}>
           필터링
         </button>
-        <button type="button" onClick={handleResetList}>
-          리셋
-        </button>
+        <button type="button" onClick={handleResetList}>리셋</button>
       </div>
 
       <ul>

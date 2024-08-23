@@ -1,9 +1,10 @@
 import { useTheme } from '@/contexts/theme';
-import S from './style.module.css';
 import TodoListApp from './TodoListApp';
+import S from './style.module.css';
 
 function GrandChild() {
   const { theme } = useTheme();
+
   const {
     GrandChild: { background, label },
   } = theme;
@@ -22,7 +23,7 @@ function GrandChild() {
       <strong className={S.label} style={labelStyles}>
         Grand Child
       </strong>
-      <TodoListApp  />
+      <TodoListApp />
     </div>
   );
 }

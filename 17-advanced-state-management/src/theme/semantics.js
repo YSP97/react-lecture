@@ -1,6 +1,7 @@
 import primitives from './primitives';
 
 const { color } = primitives;
+
 export const THEME_MODE = {
   LIGHT: 'light',
   DARK: 'dark',

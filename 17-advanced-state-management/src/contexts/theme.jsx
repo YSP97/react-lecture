@@ -2,29 +2,35 @@ import { primitives, semantics } from '@/theme';
 import { THEME_MODE } from '@/theme/semantics';
 import { createContext, useContext, useMemo, useState } from 'react';
 
+const { LIGHT, DARK } = THEME_MODE;
+
 const themeContext = createContext();
 
-const { DARK, LIGHT } = THEME_MODE;
-
 export function ThemeProvider(props) {
-  const [mode, setMode] = useState(LIGHT);
+  const [mode, setMode] = useState(THEME_MODE.LIGHT);
 
-  const themeValue = useMemo(
-    () => ({
+  const themeValue = useMemo(() => {
+    // 테마 컨텍스트 값 변경 함수(기능) 추가
+    const toggleMode = () => setMode(mode === LIGHT ? DARK : LIGHT);
+    const setLightMode = () => setMode(LIGHT);
+    const setDarkMode = () => setMode(DARK);
+
+    // 테마 컨텍스트 값 반환
+    return {
       mode,
+      isDarkMode: mode === DARK,
       theme: semantics[mode],
       color: primitives.color,
-      toggleThemeMode: () => {
-        const nextMode = mode === LIGHT ? DARK : LIGHT;
-        setMode(nextMode);
-      },
-    }),
-    [mode]
-  );
+      toggleMode,
+      setLightMode,
+      setDarkMode,
+    };
+  }, [mode]);
 
   return <themeContext.Provider value={themeValue} {...props} />;
 }
 
+/** @type {(selector: (state: any) => state) => state} */
 // eslint-disable-next-line react-refresh/only-export-components
 export function useTheme(selector = (state) => state) {
   const themeValue = useContext(themeContext);

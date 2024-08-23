@@ -27,7 +27,7 @@ export const deleteItem = (deleteId) => ({
 
 export const filterList = (filterKey) => ({
   type: ACTION_TYPES.FILTER,
-  payload: filterKey,
+  payload: filterKey
 });
 
 export const resetList = () => ({
@@ -39,9 +39,7 @@ export const resetList = () => ({
 
 const generateItem = () => crypto.randomUUID().split('-').at(0);
 
-export const INITIAL_LIST = Array(3)
-  .fill(null)
-  .map(() => generateItem());
+export const INITIAL_LIST = Array(3).fill(null).map(() => generateItem());
 
 const listReducer = (state, action) => {
   switch (action.type) {
@@ -69,7 +67,7 @@ const listReducer = (state, action) => {
 
     case ACTION_TYPES.FILTER: {
       const filterKey = action.payload.toString();
-      const nextState = state.filter((item) => item.includes(filterKey));
+      const nextState = state.filter(item => item.includes(filterKey));
       return nextState;
     }
 

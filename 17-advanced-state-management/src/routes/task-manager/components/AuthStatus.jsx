@@ -1,7 +1,6 @@
 import authReducer, { signInAction, signOutAction } from '@/stores/auth';
 import { useReducer } from 'react';
 
-// 액션 타입
 function AuthStatus() {
   const [authUser, dispatch] = useReducer(authReducer, null);
 

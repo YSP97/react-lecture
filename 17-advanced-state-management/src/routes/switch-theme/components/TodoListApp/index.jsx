@@ -1,6 +1,7 @@
 import S from './style.module.css';
 import { useLayoutEffect, useState } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
+import { useTheme } from '@/contexts/theme';
 import TodoList from './TodoList';
 import AddTodo from './AddTodo';
 import {
@@ -9,11 +10,12 @@ import {
   initialTodos,
   VISIBILITIES,
 } from './@constants';
-import { useTheme } from '@/contexts/theme';
 
 function TodoListApp() {
   const { theme } = useTheme();
+
   const [todos, setTodos] = useState(initialTodos);
+
   const [visibility, setVisibility] = useState(VISIBILITIES.ALL);
 
   const [themeColor, setThemeColor] = useState('#562ec6');

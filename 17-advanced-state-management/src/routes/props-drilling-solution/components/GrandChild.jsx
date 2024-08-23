@@ -6,11 +6,14 @@ function GrandChild() {
   // 컨텍스트 값 가져오기
   const { message } = usePage();
 
-  const { foreground, background } = useTheme(({ theme }) => theme);
+  const { forground, background, accent } = useTheme(({ theme }) => theme);
+
   return (
     <div className={S.box} style={{ backgroundColor: background }}>
-      <strong className={S.label}>Grand Child</strong>
-      <p style={{ color: foreground }}>{message}</p>
+      <strong className={S.label} style={{ color: accent }}>
+        Grand Child
+      </strong>
+      <p style={{ color: forground }}>{message}</p>
     </div>
   );
 }
